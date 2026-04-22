@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Gallery — Pearce Bespoke Austin</title>
+  <link rel="stylesheet" href="styles.css" />
+  <style>
+    /* FILTER TABS */
+    .gallery-filters {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      padding: 40px 64px 0;
+      background: var(--bg-base);
+    }
+    .filter-btn {
+      font-family: var(--mono);
+      font-size: 0.62rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--cream-dim);
+      background: transparent;
+      border: 1px solid transparent;
+      padding: 10px 20px;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .filter-btn:hover { color: var(--gold); border-color: var(--gold-dim); }
+    .filter-btn.active { color: var(--bg-base); background: var(--gold); border-color: var(--gold); }
+
+    /* MASONRY-STYLE GRID */
+    .gallery-section {
+      padding: 48px 64px 100px;
+      background: var(--bg-base);
+    }
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(12, 1fr);
+      gap: 4px;
+      auto-rows: 240px;
+    }
+    .g-item {
+      position: relative;
+      overflow: hidden;
+      background: #0f0f16;
+      cursor: pointer;
+    }
+    .g-item::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: repeating-linear-gradient(
+        -45deg, transparent, transparent 22px,
+        rgba(201,168,76,0.03) 22px, rgba(201,168,76,0.03) 23px
+      );
+    }
+    .g-item:nth-child(1)  { grid-column: span 5; grid-row: span 2; }
+    .g-item:nth-child(2)  { grid-column: span 4; grid-row: span 1; }
+    .g-item:nth-child(3)  { grid-column: span 3; grid-row: span 1; }
+    .g-item:nth-child(4)  { grid-column: span 4; grid-row: span 1; }
+    .g-item:nth-child(5)  { grid-column: span 3; grid-row: span 1; }
+    .g-item:nth-child(6)  { grid-column: span 4; grid-row: span 2; }
+    .g-item:nth-child(7)  { grid-column: span 3; grid-row: span 1; }
+    .g-item:nth-child(8)  { grid-column: span 5; grid-row: span 1; }
+    .g-item:nth-child(9)  { grid-column: span 3; grid-row: span 2; }
+    .g-item:nth-child(10) { grid-column: span 5; grid-row: span 1; }
+    .g-item:nth-child(11) { grid-column: span 4; grid-row: span 1; }
+
+    .g-item-inner {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      gap: 8px;
+      z-index: 1;
+    }
+
+    .g-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(11,11,14,0.92) 0%, rgba(11,11,14,0) 60%);
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding: 28px 28px;
+      opacity: 0;
+      transition: opacity 0.35s;
+      z-index: 2;
+    }
+    .g-item:hover .g-overlay { opacity: 1; }
+    .g-overlay-title {
+      font-family: var(--serif);
+      font-size: 1.1rem;
+      font-style: italic;
+      color: var(--cream);
+      margin-bottom: 4px;
+    }
+    .g-overlay-tag {
+      font-family: var(--mono);
+      font-size: 0.58rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--gold);
+    }
+    .g-item:hover::after { opacity: 0; }
+
+    /* LOOKBOOK FEATURE */
+    #lookbook {
+      background: var(--bg-2);
+      padding: 120px 64px;
+    }
+    .lookbook-header {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: end;
+      margin-bottom: 72px;
+    }
+    .lookbook-header p { font-size: 0.9rem; line-height: 1.8; color: var(--cream-dim); }
+    .lookbook-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 4px;
+    }
+    .lb-item {
+      position: relative;
+      height: 420px;
+      overflow: hidden;
+      background: #111118;
+    }
+    .lb-item::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: repeating-linear-gradient(
+        -45deg, transparent, transparent 22px,
+        rgba(201,168,76,0.03) 22px, rgba(201,168,76,0.03) 23px
+      );
+    }
+    .lb-label {
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      background: linear-gradient(to top, var(--bg-base), transparent);
+      padding: 36px 24px 20px;
+      z-index: 1;
+    }
+    .lb-name {
+      font-family: var(--serif);
+      font-size: 1rem;
+      font-style: italic;
+      color: var(--cream);
+    }
+    .lb-year {
+      font-family: var(--mono);
+      font-size: 0.58rem;
+      letter-spacing: 0.18em;
+      color: var(--gold);
+      margin-top: 4px;
+    }
+    .lb-inner {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      gap: 8px;
+      z-index: 0;
+    }
+  </style>
+</head>
+<body>
+
+<nav id="nav" class="solid">
+  <a href="index.html" class="nav-logo">Pearce <span>Bespoke</span></a>
+  <ul class="nav-links">
+    <li><a href="services.html">Services</a></li>
+    <li><a href="gallery.html" class="active">Gallery</a></li>
+    <li><a href="about.html">About</a></li>
+    <li><a href="contact.html">Contact</a></li>
+  </ul>
+  <a href="contact.html" class="nav-cta">Book a Fitting</a>
+</nav>
+
+<div class="page-hero">
+  <div class="page-hero-bg"></div>
+  <div class="page-eyebrow fade-up d1">The Work</div>
+  <h1 class="page-title fade-up d2">Every Stitch,<br><em>Intentional</em></h1>
+  <p class="page-subtitle fade-up d3">A selection of recent commissions — each one a collaboration between client and craftsman, worn with purpose.</p>
+</div>
+
+<!-- FILTER TABS -->
+<div class="gallery-filters reveal">
+  <button class="filter-btn active" onclick="filterGallery('all', this)">All Work</button>
+  <button class="filter-btn" onclick="filterGallery('suits', this)">Suits</button>
+  <button class="filter-btn" onclick="filterGallery('formal', this)">Formal</button>
+  <button class="filter-btn" onclick="filterGallery('shirts', this)">Shirts</button>
+  <button class="filter-btn" onclick="filterGallery('outerwear', this)">Outerwear</button>
+</div>
+
+<!-- GALLERY GRID -->
+<div class="gallery-section">
+  <div class="gallery-grid reveal" id="gallery-grid">
+    <div class="g-item" data-cat="suits" style="background-image: url('images/X5.jpg'); background-size: cover; background-position: center top;">
+      <div class="g-overlay"><div class="g-overlay-title">The Grey Plaid</div><div class="g-overlay-tag">Bespoke Suit · 2025</div></div>
+    </div>
+    <div class="g-item" data-cat="suits" style="background-image: url('images/F1.jpg'); background-size: cover; background-position: center top;">
+      <div class="g-overlay"><div class="g-overlay-title">The Rose Pink</div><div class="g-overlay-tag">Custom Suit · 2025</div></div>
+    </div>
+    <div class="g-item" data-cat="suits" style="background-image: url('images/H5.jpg'); background-size: cover; background-position: center top;">
+      <div class="g-overlay"><div class="g-overlay-title">The Burnt Orange</div><div class="g-overlay-tag">Power Suit · 2025</div></div>
+    </div>
+    <div class="g-item" data-cat="outerwear" style="background-image: url('images/9.jpg'); background-size: cover; background-position: center top;">
+      <div class="g-overlay"><div class="g-overlay-title">The Blush Coat</div><div class="g-overlay-tag">Bespoke Coat · 2025</div></div>
+    </div>
+    <div class="g-item" data-cat="suits" style="background-image: url('images/O6.jpg'); background-size: cover; background-position: center top;">
+      <div class="g-overlay"><div class="g-overlay-title">The Champagne Set</div><div class="g-overlay-tag">Blazer + Skirt · 2025</div></div>
+    </div>
+    <div class="g-item" data-cat="suits" style="background-image: url('images/R6.jpg'); background-size: cover; background-position: center top;">
+      <div class="g-overlay"><div class="g-overlay-title">The Steel Blue</div><div class="g-overlay-tag">Custom Suit · 2025</div></div>
+    </div>
+    <div class="g-item" data-cat="suits" style="background-image: url('images/S6.jpg'); background-size: cover; background-position: center 20%;">
+      <div class="g-overlay"><div class="g-overlay-title">The Sage Mint</div><div class="g-overlay-tag">Bespoke Suit · 2025</div></div>
+    </div>
+    <div class="g-item" data-cat="suits" style="background-image: url('images/L6.jpg'); background-size: cover; background-position: center top;">
+      <div class="g-overlay"><div class="g-overlay-title">The Pink Detail</div><div class="g-overlay-tag">Blazer · 2025</div></div>
+    </div>
+    <div class="g-item" data-cat="formal" style="background-image: url('images/O6.jpg'); background-size: cover; background-position: center 30%;">
+      <div class="g-overlay"><div class="g-overlay-title">City Ready</div><div class="g-overlay-tag">Custom Set · 2025</div></div>
+    </div>
+    <div class="g-item" data-cat="suits" style="background-image: url('images/H5.jpg'); background-size: cover; background-position: center 30%;">
+      <div class="g-overlay"><div class="g-overlay-title">The Bold Statement</div><div class="g-overlay-tag">Power Suit · 2025</div></div>
+    </div>
+    <div class="g-item" data-cat="outerwear" style="background-image: url('images/F1.jpg'); background-size: cover; background-position: center 20%;">
+      <div class="g-overlay"><div class="g-overlay-title">Street Ready</div><div class="g-overlay-tag">Custom Suit · 2025</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- LOOKBOOK -->
+<section id="lookbook">
+  <div class="lookbook-header">
+    <div>
+      <div class="section-eyebrow reveal">Lookbook</div>
+      <h2 class="section-title reveal">The 2024<br><em>Collection</em></h2>
+    </div>
+    <p class="reveal">Each season, we document our finest commissions — a visual record of craftsmanship made personal. These are some of our most celebrated pieces from the past year.</p>
+  </div>
+  <div class="lookbook-grid reveal">
+    <div class="lb-item" style="background-image: url('images/X5.jpg'); background-size: cover; background-position: center top;">
+      <div class="lb-label"><div class="lb-name">The Executive</div><div class="lb-year">Spring 2025</div></div>
+    </div>
+    <div class="lb-item" style="background-image: url('images/O6.jpg'); background-size: cover; background-position: center top;">
+      <div class="lb-label"><div class="lb-name">City Motion</div><div class="lb-year">Spring 2025</div></div>
+    </div>
+    <div class="lb-item" style="background-image: url('images/R6.jpg'); background-size: cover; background-position: center top;">
+      <div class="lb-label"><div class="lb-name">Summer Teal</div><div class="lb-year">Summer 2025</div></div>
+    </div>
+    <div class="lb-item" style="background-image: url('images/S6.jpg'); background-size: cover; background-position: center 20%;">
+      <div class="lb-label"><div class="lb-name">The Atelier</div><div class="lb-year">Spring 2025</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<div style="background: var(--gold); padding: 90px 64px; display: flex; align-items: center; justify-content: space-between;" class="reveal">
+  <div style="font-family: var(--serif); font-size: clamp(2rem,3.5vw,3.2rem); font-weight:300; color: var(--bg-base); line-height:1.1;">
+    Commission your own<br><em>chapter of this story.</em>
+  </div>
+  <a href="contact.html" style="font-family:var(--mono);font-size:0.7rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--gold);background:var(--bg-base);padding:17px 36px;text-decoration:none;transition:background 0.2s;" onmouseover="this.style.background='#1a1a1f'" onmouseout="this.style.background='var(--bg-base)'">Schedule a Fitting</a>
+</div>
+
+<footer>
+  <div class="footer-top">
+    <div>
+      <div class="footer-brand">Pearce <span>Bespoke</span></div>
+      <div class="footer-tagline">Austin, Texas · Est. 2019</div>
+      <p class="footer-about">A Pearce Bespoke franchise serving Austin's most discerning gentlemen with world-class tailoring and an uncompromising standard of craft.</p>
+    </div>
+    <div>
+      <div class="footer-col-title">Services</div>
+      <ul class="footer-links">
+        <li><a href="services.html">Bespoke Suits</a></li>
+        <li><a href="services.html">Custom Shirts</a></li>
+        <li><a href="services.html">Wedding Attire</a></li>
+        <li><a href="services.html">Alterations</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="footer-col-title">Navigate</div>
+      <ul class="footer-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="gallery.html">Gallery</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="contact.html">Book a Fitting</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="footer-col-title">Follow</div>
+      <ul class="footer-links">
+        <li><a href="#">Instagram</a></li>
+        <li><a href="#">Facebook</a></li>
+        <li><a href="#">LinkedIn</a></li>
+        <li><a href="#">Google Reviews</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <div class="footer-copy">© 2025 Pearce Bespoke Austin — All rights reserved</div>
+    <div class="footer-legal"><a href="#">Privacy</a><a href="#">Terms</a></div>
+  </div>
+</footer>
+
+<script>
+  const nav = document.getElementById('nav');
+  window.addEventListener('scroll', () => {
+    if (window.scrollY > 60) nav.classList.remove('solid');
+  });
+  const reveals = document.querySelectorAll('.reveal');
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); } });
+  }, { threshold: 0.07 });
+  reveals.forEach(el => obs.observe(el));
+
+  function filterGallery(cat, btn) {
+    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    document.querySelectorAll('.g-item').forEach(item => {
+      const show = cat === 'all' || item.dataset.cat === cat;
+      item.style.display = show ? '' : 'none';
+    });
+  }
+</script>
+</body>
+</html>

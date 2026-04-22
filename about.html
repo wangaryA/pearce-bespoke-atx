@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>About — Pearce Bespoke ATX</title>
+  <link rel="stylesheet" href="styles.css" />
+  <style>
+    /* OWNER INTRO */
+    #owner-intro {
+      padding: 120px 64px;
+      background: var(--bg-base);
+    }
+    .owner-layout {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 100px;
+      align-items: start;
+    }
+    .owner-portrait {
+      position: relative;
+      height: 680px;
+      top: 0;
+    }
+    .owner-portrait-img {
+      position: absolute;
+      inset: 0;
+    }
+    .portrait-accent-tl {
+      position: absolute;
+      top: -20px; left: -20px;
+      width: 60%; height: 60%;
+      border: 1px solid var(--gold-dim);
+      pointer-events: none;
+    }
+    .portrait-badge {
+      position: absolute;
+      bottom: 36px; right: 36px;
+      background: var(--gold);
+      padding: 20px 28px;
+      z-index: 2;
+    }
+    .badge-line1 {
+      font-family: var(--mono);
+      font-size: 0.58rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--bg-base);
+      margin-bottom: 4px;
+    }
+    .badge-line2 {
+      font-family: var(--serif);
+      font-size: 1.25rem;
+      font-weight: 500;
+      color: var(--bg-base);
+    }
+    .owner-content { padding-top: 20px; }
+    .owner-name {
+      font-family: var(--serif);
+      font-size: clamp(2.8rem, 4.5vw, 4.2rem);
+      font-weight: 300;
+      line-height: 1.06;
+      color: var(--cream);
+      margin-bottom: 8px;
+    }
+    .owner-name em { font-style: italic; color: var(--gold-light); }
+    .owner-title-text {
+      font-family: var(--mono);
+      font-size: 0.65rem;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 44px;
+    }
+    .owner-body {
+      font-size: 0.93rem;
+      line-height: 1.9;
+      color: var(--cream-dim);
+      margin-bottom: 20px;
+    }
+    .owner-quote {
+      border-left: 2px solid var(--gold);
+      padding: 20px 28px;
+      margin: 40px 0;
+      background: rgba(201,168,76,0.04);
+    }
+    .owner-quote p {
+      font-family: var(--serif);
+      font-size: 1.3rem;
+      font-style: italic;
+      font-weight: 300;
+      color: var(--cream);
+      line-height: 1.55;
+    }
+    .owner-quote cite {
+      display: block;
+      margin-top: 12px;
+      font-family: var(--mono);
+      font-size: 0.6rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--gold);
+      font-style: normal;
+    }
+    .owner-stats {
+      display: flex;
+      gap: 48px;
+      margin-top: 48px;
+      padding-top: 48px;
+      border-top: 1px solid var(--gold-dim);
+    }
+    .o-stat { display: flex; flex-direction: column; gap: 6px; }
+    .o-stat-num {
+      font-family: var(--serif);
+      font-size: 2.4rem;
+      font-weight: 300;
+      color: var(--gold);
+      line-height: 1;
+    }
+    .o-stat-label {
+      font-family: var(--mono);
+      font-size: 0.6rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+    }
+
+    /* PHILOSOPHY */
+    #philosophy {
+      background: var(--bg-2);
+      padding: 120px 64px;
+    }
+    .philosophy-layout {
+      display: grid;
+      grid-template-columns: 1fr 2fr;
+      gap: 100px;
+      align-items: start;
+    }
+    .philosophy-left { position: sticky; top: 120px; }
+    .philosophy-left .section-title { margin-bottom: 28px; }
+    .philosophy-pillars { display: flex; flex-direction: column; }
+    .pillar {
+      padding: 44px 0;
+      border-bottom: 1px solid var(--gold-dim);
+    }
+    .pillar:first-child { border-top: 1px solid var(--gold-dim); }
+    .pillar-num {
+      font-family: var(--mono);
+      font-size: 0.6rem;
+      letter-spacing: 0.22em;
+      color: var(--gold);
+      margin-bottom: 14px;
+    }
+    .pillar-title {
+      font-family: var(--serif);
+      font-size: 1.6rem;
+      font-weight: 400;
+      color: var(--cream);
+      margin-bottom: 14px;
+    }
+    .pillar-body { font-size: 0.88rem; line-height: 1.8; color: var(--cream-dim); }
+
+    /* FRANCHISE */
+    #franchise {
+      background: var(--bg-3);
+      padding: 120px 64px;
+    }
+    .franchise-layout {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 100px;
+      align-items: center;
+    }
+    .franchise-content .section-title { margin-bottom: 28px; }
+    .franchise-content p { font-size: 0.9rem; line-height: 1.85; color: var(--cream-dim); margin-bottom: 16px; }
+    .franchise-img { height: 480px; position: relative; }
+    .franchise-frame {
+      position: absolute;
+      top: -20px; right: -20px;
+      width: 70%; height: 70%;
+      border: 1px solid var(--gold-dim);
+      pointer-events: none;
+    }
+    .brand-values {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+      margin-top: 40px;
+    }
+    .brand-val {
+      padding: 24px;
+      background: rgba(201,168,76,0.04);
+      border: 1px solid var(--gold-dim);
+    }
+    .brand-val-title {
+      font-family: var(--serif);
+      font-size: 1.1rem;
+      color: var(--cream);
+      margin-bottom: 8px;
+    }
+    .brand-val-body { font-size: 0.8rem; line-height: 1.7; color: var(--cream-dim); }
+
+    /* AWARDS */
+    #recognition {
+      background: var(--bg-base);
+      padding: 100px 64px;
+    }
+    .recognition-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2px;
+      margin-top: 64px;
+    }
+    .award-card {
+      background: var(--bg-2);
+      padding: 44px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+    .award-year {
+      font-family: var(--mono);
+      font-size: 0.6rem;
+      letter-spacing: 0.22em;
+      color: var(--gold);
+    }
+    .award-title {
+      font-family: var(--serif);
+      font-size: 1.3rem;
+      font-weight: 400;
+      color: var(--cream);
+      line-height: 1.25;
+    }
+    .award-org { font-size: 0.82rem; color: var(--text-muted); }
+  </style>
+</head>
+<body>
+
+<nav id="nav" class="solid">
+  <a href="index.html" class="nav-logo">Pearce <span>Bespoke</span></a>
+  <ul class="nav-links">
+    <li><a href="services.html">Services</a></li>
+    <li><a href="gallery.html">Gallery</a></li>
+    <li><a href="about.html" class="active">About</a></li>
+    <li><a href="contact.html">Contact</a></li>
+  </ul>
+  <a href="contact.html" class="nav-cta">Book a Fitting</a>
+</nav>
+
+<div class="page-hero">
+  <div class="page-hero-bg"></div>
+  <div class="page-eyebrow fade-up d1">The Craftsman</div>
+  <h1 class="page-title fade-up d2">Built on Standards,<br><em>Not Shortcuts</em></h1>
+  <p class="page-subtitle fade-up d3">The story behind Pearce Bespoke ATX — an entrepreneur-turned-clothier dedicated to helping people show up with intention, confidence, and a look that reflects who they are at their best.</p>
+</div>
+
+<!-- OWNER INTRO -->
+<section id="owner-intro">
+  <div class="owner-layout">
+    <div class="owner-portrait reveal">
+      <div class="owner-portrait-img" style="background-image: url('images/Rashaka%20Headshot%20Photo.png'); background-size: cover; background-position: center top;"></div>
+      <div class="portrait-accent-tl"></div>
+      <div class="portrait-badge">
+        <div class="badge-line1">Mobile Clothier</div>
+        <div class="badge-line2">Cedar Park, Texas</div>
+      </div>
+    </div>
+
+    <div class="owner-content">
+      <div class="section-eyebrow reveal">About Rashaka</div>
+      <h2 class="owner-name reveal">Rashaka<br><em>Boykins</em></h2>
+      <div class="owner-title-text reveal">Entrepreneur & Mobile Clothier · Pearce Bespoke ATX</div>
+
+      <p class="owner-body reveal">I'm Rashaka Boykins — an entrepreneur, business IT consultant, and mobile clothier dedicated to helping individuals elevate both their image and their confidence.</p>
+
+      <p class="owner-body reveal">Before launching my mobile clothier business, I built my career in IT, where I partnered with organizations to improve operations, streamline processes, and enhance overall performance. That experience sharpened my ability to understand people, identify needs quickly, and deliver tailored solutions that create real impact.</p>
+
+      <p class="owner-body reveal">Through business, I learned that success often comes down to how you present yourself — your confidence, your presence, and the impression you leave behind. That realization led me to transition into the world of custom clothing, where I could combine strategy, personalization, and style into a more tangible, personal service. Today, I bring that same consultative approach to every client interaction. I don't just provide clothing — I offer guidance, insight, and a curated experience designed around your goals, lifestyle, and personal brand.</p>
+
+      <div class="owner-quote reveal">
+        <p>"My mission is simple: to help you show up with intention, confidence, and a look that reflects who you are at your best."</p>
+        <cite>Rashaka Boykins · Mobile Clothier</cite>
+      </div>
+
+      <div class="owner-stats reveal">
+        <div class="o-stat"><span class="o-stat-num">25+</span><span class="o-stat-label">Measurements Taken</span></div>
+        <div class="o-stat"><span class="o-stat-num">3,000+</span><span class="o-stat-label">Fabric Options</span></div>
+        <div class="o-stat"><span class="o-stat-num">3–4 Wks</span><span class="o-stat-label">Avg. Delivery</span></div>
+        <div class="o-stat"><span class="o-stat-num">100%</span><span class="o-stat-label">Fit Guarantee</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PHILOSOPHY -->
+<section id="philosophy">
+  <div class="philosophy-layout">
+    <div class="philosophy-left reveal">
+      <div class="section-eyebrow">Our Philosophy</div>
+      <h2 class="section-title">What We<br><em>Believe</em></h2>
+    </div>
+    <div class="philosophy-pillars">
+      <div class="pillar reveal">
+        <div class="pillar-num">01</div>
+        <div class="pillar-title">Fit above all else</div>
+        <div class="pillar-body">A garment can be made from the finest fabric in the world, but if it doesn't fit, it's worthless. We spend more time on fit than any other element of the craft — because everything else is secondary.</div>
+      </div>
+      <div class="pillar reveal">
+        <div class="pillar-num">02</div>
+        <div class="pillar-title">Craft, not production</div>
+        <div class="pillar-body">We are not a factory. We don't have quotas. We take on a limited number of commissions at any one time to ensure every client receives our full attention. Slow is smooth, and smooth is excellent.</div>
+      </div>
+      <div class="pillar reveal">
+        <div class="pillar-num">03</div>
+        <div class="pillar-title">The client is the constant</div>
+        <div class="pillar-body">Trends come and go. Our clients' measurement records, preferences, and style histories stay with us permanently. We build a relationship, not a transaction — and that relationship compounds over time.</div>
+      </div>
+      <div class="pillar reveal">
+        <div class="pillar-num">04</div>
+        <div class="pillar-title">Community investment</div>
+        <div class="pillar-body">As a Cedar Park-based business, we are committed to bringing world-class custom clothing to the Austin metro — helping individuals from all walks of life show up with confidence and intention. Excellence has no prerequisites — only practice.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FRANCHISE -->
+<section id="franchise">
+  <div class="franchise-layout">
+    <div class="franchise-content">
+      <div class="section-eyebrow reveal">The Brand</div>
+      <h2 class="section-title reveal">Pearce Bespoke:<br><em>A Legacy of Excellence</em></h2>
+      <p class="reveal">Pearce Bespoke is a nationally recognized custom clothing franchise founded on a single principle: that every person deserves the confidence that comes with clothing made specifically for them.</p>
+      <p class="reveal">The franchise operates across major US cities, each location independently owned and operated by a master tailor with deep roots in their community. We are not a chain — we are a network of artisans who share a standard.</p>
+      <div class="brand-values reveal">
+        <div class="brand-val">
+          <div class="brand-val-title">Mastery</div>
+          <div class="brand-val-body">Every franchise owner holds a master tailor credential with minimum 10 years in the craft.</div>
+        </div>
+        <div class="brand-val">
+          <div class="brand-val-title">Locality</div>
+          <div class="brand-val-body">We serve the community we live in — each location reflects the culture of its city.</div>
+        </div>
+        <div class="brand-val">
+          <div class="brand-val-title">Integrity</div>
+          <div class="brand-val-body">No hidden costs, no upselling, no compromises on materials. Ever.</div>
+        </div>
+        <div class="brand-val">
+          <div class="brand-val-title">Legacy</div>
+          <div class="brand-val-body">We create garments meant to be worn for decades and passed on with pride.</div>
+        </div>
+      </div>
+    </div>
+    <div class="franchise-img reveal" style="background: #D8D4CD; position: relative;">
+      <div class="franchise-frame"></div>
+    </div>
+  </div>
+</section>
+
+
+<!-- CTA -->
+<div style="background: var(--gold); padding: 90px 64px; display: flex; align-items: center; justify-content: space-between;" class="reveal">
+  <div style="font-family: var(--serif); font-size: clamp(2rem,3.5vw,3.2rem); font-weight:300; color: var(--on-gold); line-height:1.1;">
+    Let's connect.<br><em>No obligation, ever.</em>
+  </div>
+  <a href="contact.html" style="font-family:var(--mono);font-size:0.7rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--gold);background:var(--on-gold);padding:17px 36px;text-decoration:none;" onmouseover="this.style.background='#2a2520'" onmouseout="this.style.background='var(--on-gold)'">Book a Consultation</a>
+</div>
+
+<footer>
+  <div class="footer-top">
+    <div>
+      <div class="footer-brand">Pearce <span>Bespoke</span></div>
+      <div class="footer-tagline">Cedar Park, Texas · Mobile Clothier</div>
+      <p class="footer-about">A Pearce Bespoke franchise serving the Austin metro area with world-class custom clothing and an uncompromising commitment to fit, confidence, and style.</p>
+    </div>
+    <div>
+      <div class="footer-col-title">Services</div>
+      <ul class="footer-links">
+        <li><a href="services.html">Bespoke Suits</a></li>
+        <li><a href="services.html">Custom Shirts</a></li>
+        <li><a href="services.html">Wedding Attire</a></li>
+        <li><a href="services.html">Alterations</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="footer-col-title">Navigate</div>
+      <ul class="footer-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="gallery.html">Gallery</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="contact.html">Book a Fitting</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="footer-col-title">Follow</div>
+      <ul class="footer-links">
+        <li><a href="https://www.instagram.com/atxpearcebespoke" target="_blank">Instagram @ATXPEARCEBESPOKE</a></li>
+        <li><a href="https://www.linkedin.com/company/111337158/" target="_blank">LinkedIn</a></li>
+        <li><a href="mailto:rboykins@pearcebespoke.com">rboykins@pearcebespoke.com</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <div class="footer-copy">© 2025 Pearce Bespoke ATX — All rights reserved</div>
+    <div class="footer-legal"><a href="#">Privacy</a><a href="#">Terms</a></div>
+  </div>
+</footer>
+
+<script>
+  const nav = document.getElementById('nav');
+  window.addEventListener('scroll', () => {
+    if (window.scrollY > 60) nav.classList.remove('solid');
+  });
+  const reveals = document.querySelectorAll('.reveal');
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); } });
+  }, { threshold: 0.07 });
+  reveals.forEach(el => obs.observe(el));
+</script>
+</body>
+</html>

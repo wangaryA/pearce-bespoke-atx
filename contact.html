@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Contact — Pearce Bespoke ATX</title>
+  <link rel="stylesheet" href="styles.css" />
+  <style>
+    /* CONTACT MAIN */
+    #contact-main {
+      padding: 100px 64px 120px;
+      background: var(--bg-base);
+    }
+    .contact-layout {
+      display: grid;
+      grid-template-columns: 1fr 1.4fr;
+      gap: 100px;
+      align-items: start;
+    }
+    .contact-left { position: sticky; top: 120px; }
+    .contact-left .section-title { margin-bottom: 28px; }
+    .contact-intro { font-size: 0.9rem; line-height: 1.85; color: var(--cream-dim); margin-bottom: 52px; }
+
+    .contact-details { display: flex; flex-direction: column; gap: 28px; }
+    .c-item { display: flex; align-items: flex-start; gap: 20px; }
+    .c-icon {
+      width: 42px; height: 42px;
+      border: 1px solid var(--gold-dim);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      transition: background 0.2s, border-color 0.2s;
+    }
+    .c-icon:hover { background: var(--gold-dim); border-color: var(--gold); }
+    .c-label {
+      font-family: var(--mono);
+      font-size: 0.58rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-bottom: 5px;
+    }
+    .c-val { font-size: 0.9rem; line-height: 1.6; color: var(--cream); }
+
+    /* FORM */
+    .booking-form {
+      background: var(--bg-2);
+      padding: 64px 60px;
+      border-top: 2px solid var(--gold);
+    }
+    .form-heading {
+      font-family: var(--serif);
+      font-size: 1.8rem;
+      font-weight: 300;
+      color: var(--cream);
+      margin-bottom: 8px;
+    }
+    .form-subheading {
+      font-family: var(--mono);
+      font-size: 0.6rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-bottom: 44px;
+    }
+    .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+    .form-full { grid-column: span 2; }
+    .form-group { display: flex; flex-direction: column; gap: 8px; }
+    .form-label {
+      font-family: var(--mono);
+      font-size: 0.58rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+    }
+    .form-input, .form-select, .form-textarea {
+      background: rgba(0,0,0,0.04);
+      border: 1px solid rgba(201,168,76,0.12);
+      color: var(--cream);
+      font-family: var(--sans);
+      font-size: 0.9rem;
+      padding: 14px 18px;
+      outline: none;
+      width: 100%;
+      transition: border-color 0.2s, background 0.2s;
+    }
+    .form-input::placeholder, .form-textarea::placeholder { color: var(--text-muted); }
+    .form-input:focus, .form-select:focus, .form-textarea:focus {
+      border-color: var(--gold);
+      background: rgba(201,168,76,0.06);
+    }
+    .form-select { appearance: none; cursor: pointer; }
+    .form-textarea { resize: vertical; min-height: 130px; }
+
+    /* Preferred date */
+    .preferred-times {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 8px;
+      margin-top: 4px;
+    }
+    .time-chip {
+      font-family: var(--mono);
+      font-size: 0.58rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--cream-dim);
+      border: 1px solid var(--gold-dim);
+      padding: 10px 8px;
+      text-align: center;
+      cursor: pointer;
+      transition: all 0.2s;
+      user-select: none;
+    }
+    .time-chip:hover { border-color: var(--gold); color: var(--gold); }
+    .time-chip.selected { background: var(--gold); color: var(--bg-base); border-color: var(--gold); }
+
+    .form-submit {
+      font-family: var(--mono);
+      font-size: 0.7rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--bg-base);
+      background: var(--gold);
+      padding: 18px 40px;
+      border: none;
+      cursor: pointer;
+      transition: background 0.2s, transform 0.2s;
+      margin-top: 8px;
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .form-submit:hover { background: var(--gold-light); transform: translateY(-2px); }
+    .form-submit.success { background: #3d7a52; color: #fff; pointer-events: none; }
+    .form-note {
+      font-family: var(--mono);
+      font-size: 0.58rem;
+      letter-spacing: 0.12em;
+      color: var(--text-muted);
+      margin-top: 16px;
+      line-height: 1.7;
+    }
+
+    /* MAP PLACEHOLDER */
+    #map-section {
+      height: 420px;
+      background: var(--bg-2);
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    #map-section::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: repeating-linear-gradient(0deg, transparent, transparent 39px, rgba(201,168,76,0.05) 39px, rgba(201,168,76,0.05) 40px),
+                  repeating-linear-gradient(90deg, transparent, transparent 39px, rgba(201,168,76,0.05) 39px, rgba(201,168,76,0.05) 40px);
+    }
+    .map-pin {
+      position: relative;
+      z-index: 2;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 16px;
+    }
+    .map-pin-dot {
+      width: 16px; height: 16px;
+      background: var(--gold);
+      border-radius: 50%;
+      box-shadow: 0 0 0 6px rgba(201,168,76,0.15), 0 0 0 20px rgba(201,168,76,0.06);
+    }
+    .map-pin-label {
+      background: var(--bg-base);
+      border: 1px solid var(--gold-dim);
+      padding: 16px 24px;
+      font-family: var(--mono);
+      font-size: 0.62rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--cream);
+      text-align: center;
+      line-height: 1.8;
+    }
+
+    /* FAQ */
+    #faq {
+      background: var(--bg-3);
+      padding: 100px 64px;
+    }
+    .faq-layout {
+      display: grid;
+      grid-template-columns: 1fr 2fr;
+      gap: 100px;
+      align-items: start;
+    }
+    .faq-left { position: sticky; top: 120px; }
+    .faq-list { display: flex; flex-direction: column; }
+    .faq-item {
+      border-bottom: 1px solid var(--gold-dim);
+      overflow: hidden;
+    }
+    .faq-item:first-child { border-top: 1px solid var(--gold-dim); }
+    .faq-q {
+      padding: 28px 0;
+      font-family: var(--serif);
+      font-size: 1.2rem;
+      color: var(--cream);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      user-select: none;
+    }
+    .faq-icon {
+      width: 24px; height: 24px;
+      border: 1px solid var(--gold-dim);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      transition: background 0.2s, transform 0.3s;
+      font-size: 0.8rem;
+      color: var(--gold);
+    }
+    .faq-item.open .faq-icon { background: var(--gold); color: var(--bg-base); transform: rotate(45deg); }
+    .faq-a {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.4s ease, padding 0.3s;
+      font-size: 0.88rem;
+      line-height: 1.8;
+      color: var(--cream-dim);
+      padding: 0;
+    }
+    .faq-item.open .faq-a { max-height: 300px; padding-bottom: 28px; }
+  </style>
+</head>
+<body>
+
+<nav id="nav" class="solid">
+  <a href="index.html" class="nav-logo">Pearce <span>Bespoke</span></a>
+  <ul class="nav-links">
+    <li><a href="services.html">Services</a></li>
+    <li><a href="gallery.html">Gallery</a></li>
+    <li><a href="about.html">About</a></li>
+    <li><a href="contact.html" class="active">Contact</a></li>
+  </ul>
+  <a href="contact.html" class="nav-cta">Book a Fitting</a>
+</nav>
+
+<div class="page-hero">
+  <div class="page-hero-bg"></div>
+  <div class="page-eyebrow fade-up d1">Let's Begin</div>
+  <h1 class="page-title fade-up d2">Book Your<br><em>Consultation</em></h1>
+  <p class="page-subtitle fade-up d3">Your first visit is always complimentary. No commitment required — just a conversation about who you are and what you need.</p>
+</div>
+
+<!-- CONTACT MAIN -->
+<section id="contact-main">
+  <div class="contact-layout">
+    <div class="contact-left">
+      <div class="section-eyebrow reveal">Connect With Us</div>
+      <h2 class="section-title reveal">Reach Out &<br><em>Let's Connect</em></h2>
+      <p class="contact-intro reveal">We're a mobile clothier — we come to you. Book an appointment and we'll meet at your home, office, or event. We recommend scheduling at least 48 hours in advance.</p>
+      <div class="contact-details reveal">
+        <div class="c-item">
+          <div class="c-icon">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#c9a84c" stroke-width="1.5">
+              <path d="M12 2C8.1 2 5 5.1 5 9c0 5.2 7 13 7 13s7-7.8 7-13c0-3.9-3.1-7-7-7z"/><circle cx="12" cy="9" r="2.5"/>
+            </svg>
+          </div>
+          <div>
+            <div class="c-label">Service Area</div>
+            <div class="c-val">Cedar Park, Texas<br>&amp; Surrounding Austin Metro</div>
+          </div>
+        </div>
+        <div class="c-item">
+          <div class="c-icon">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#c9a84c" stroke-width="1.5">
+              <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/>
+            </svg>
+          </div>
+          <div>
+            <div class="c-label">Email</div>
+            <div class="c-val"><a href="mailto:rboykins@pearcebespoke.com" style="color:inherit;">rboykins@pearcebespoke.com</a></div>
+          </div>
+        </div>
+        <div class="c-item">
+          <div class="c-icon">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#c9a84c" stroke-width="1.5">
+              <rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="#c9a84c" stroke="none"/>
+            </svg>
+          </div>
+          <div>
+            <div class="c-label">Instagram</div>
+            <div class="c-val"><a href="https://www.instagram.com/atxpearcebespoke" target="_blank" style="color:inherit;">@ATXPEARCEBESPOKE</a><br>DM us for a quick response</div>
+          </div>
+        </div>
+        <div class="c-item">
+          <div class="c-icon">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#c9a84c" stroke-width="1.5">
+              <circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/>
+            </svg>
+          </div>
+          <div>
+            <div class="c-label">Availability</div>
+            <div class="c-val">By Appointment · Mobile Service<br>We come to you — home, office, or event</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- BOOKING FORM -->
+    <div class="booking-form reveal">
+      <div class="form-heading">Request a Consultation</div>
+      <div class="form-subheading">We'll confirm within 24 hours</div>
+
+      <div class="form-grid" id="booking-form">
+        <div class="form-group">
+          <label class="form-label">First Name</label>
+          <input class="form-input" type="text" placeholder="James" id="f-first" />
+        </div>
+        <div class="form-group">
+          <label class="form-label">Last Name</label>
+          <input class="form-input" type="text" placeholder="Thornton" id="f-last" />
+        </div>
+        <div class="form-group">
+          <label class="form-label">Email</label>
+          <input class="form-input" type="email" placeholder="james@example.com" id="f-email" />
+        </div>
+        <div class="form-group">
+          <label class="form-label">Phone</label>
+          <input class="form-input" type="tel" placeholder="(512) 000-0000" id="f-phone" />
+        </div>
+        <div class="form-group form-full">
+          <label class="form-label">Service Interest</label>
+          <select class="form-select" id="f-service">
+            <option value="">Select a service...</option>
+            <option>Full Bespoke Suit</option>
+            <option>Custom Dress Shirts</option>
+            <option>Wedding &amp; Formalwear</option>
+            <option>Executive Wardrobe</option>
+            <option>Alterations &amp; Tailoring</option>
+            <option>General Consultation</option>
+          </select>
+        </div>
+        <div class="form-group form-full">
+          <label class="form-label">Preferred Time of Day</label>
+          <div class="preferred-times">
+            <div class="time-chip" onclick="toggleChip(this)">Morning<br>10–12</div>
+            <div class="time-chip" onclick="toggleChip(this)">Midday<br>12–2</div>
+            <div class="time-chip" onclick="toggleChip(this)">Afternoon<br>2–5</div>
+            <div class="time-chip" onclick="toggleChip(this)">Evening<br>5–7</div>
+          </div>
+        </div>
+        <div class="form-group form-full">
+          <label class="form-label">Tell us about your vision</label>
+          <textarea class="form-textarea" id="f-message" placeholder="Occasion, timeline, any details about your style goals..."></textarea>
+        </div>
+        <div class="form-full">
+          <button class="form-submit" id="submit-btn" onclick="handleSubmit(event)">
+            <span id="btn-text">Request Consultation</span>
+            <span>→</span>
+          </button>
+          <div class="form-note">By submitting this form you agree to be contacted by Pearce Bespoke ATX. We never share your information. Your first consultation is always complimentary.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- FAQ -->
+<section id="faq">
+  <div class="faq-layout">
+    <div class="faq-left reveal">
+      <div class="section-eyebrow">Questions</div>
+      <h2 class="section-title">Before<br><em>You Visit</em></h2>
+    </div>
+    <div class="faq-list reveal">
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">How long does a first consultation take? <div class="faq-icon">+</div></div>
+        <div class="faq-a">Your first consultation typically lasts 45 minutes to an hour. We'll discuss your lifestyle, style preferences, and the garments you have in mind. There's no pressure and no obligation to commission anything on the spot.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">How many fittings will I need? <div class="faq-icon">+</div></div>
+        <div class="faq-a">For a full bespoke suit, we typically schedule 2–3 fitting appointments. The first is a baste fitting where we evaluate the rough structure; the second and third refine every seam and detail. Custom shirts and smaller pieces may require only one fitting.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">What is the typical turnaround time? <div class="faq-icon">+</div></div>
+        <div class="faq-a">A full bespoke suit takes approximately 8–12 weeks from the first fitting to delivery. Custom shirts are typically ready in 3 weeks. If you have a specific event or deadline, let us know at consultation and we'll do our best to accommodate.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">Do you offer rush commissions? <div class="faq-icon">+</div></div>
+        <div class="faq-a">Yes, we offer rush services for urgent commissions, subject to our current workload. A rush fee applies for timelines shorter than 6 weeks for full suits. Please contact us directly to discuss your specific timeline.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">What is your pricing structure? <div class="faq-icon">+</div></div>
+        <div class="faq-a">All pricing is transparent and discussed at consultation. Full bespoke suits start at $2,400 depending on fabric choice. A 50% deposit is required to begin work; the balance is due at final delivery. We do not charge for consultations or fabric viewings.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">Do you work with clients who are hard to fit? <div class="faq-icon">+</div></div>
+        <div class="faq-a">Absolutely — this is one of the primary advantages of bespoke tailoring. We regularly work with clients who have asymmetrical frames, non-standard proportions, or have struggled with off-the-rack and made-to-measure options. Every pattern is made uniquely for you.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-top">
+    <div>
+      <div class="footer-brand">Pearce <span>Bespoke</span></div>
+      <div class="footer-tagline">Cedar Park, Texas · Mobile Clothier</div>
+      <p class="footer-about">A Pearce Bespoke franchise serving the Austin metro area with world-class custom clothing and an uncompromising commitment to fit, confidence, and style.</p>
+    </div>
+    <div>
+      <div class="footer-col-title">Services</div>
+      <ul class="footer-links">
+        <li><a href="services.html">Bespoke Suits</a></li>
+        <li><a href="services.html">Custom Shirts</a></li>
+        <li><a href="services.html">Wedding Attire</a></li>
+        <li><a href="services.html">Alterations</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="footer-col-title">Navigate</div>
+      <ul class="footer-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="gallery.html">Gallery</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="contact.html">Book a Fitting</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="footer-col-title">Follow</div>
+      <ul class="footer-links">
+        <li><a href="https://www.instagram.com/atxpearcebespoke" target="_blank">Instagram @ATXPEARCEBESPOKE</a></li>
+        <li><a href="https://www.linkedin.com/company/111337158/" target="_blank">LinkedIn</a></li>
+        <li><a href="mailto:rboykins@pearcebespoke.com">rboykins@pearcebespoke.com</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <div class="footer-copy">© 2025 Pearce Bespoke ATX — All rights reserved</div>
+    <div class="footer-legal"><a href="#">Privacy</a><a href="#">Terms</a></div>
+  </div>
+</footer>
+
+<script>
+  const nav = document.getElementById('nav');
+  window.addEventListener('scroll', () => {
+    if (window.scrollY > 60) nav.classList.remove('solid');
+  });
+  const reveals = document.querySelectorAll('.reveal');
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); } });
+  }, { threshold: 0.07 });
+  reveals.forEach(el => obs.observe(el));
+
+  function toggleChip(el) {
+    el.classList.toggle('selected');
+  }
+
+  function toggleFaq(el) {
+    const item = el.parentElement;
+    const isOpen = item.classList.contains('open');
+    document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
+    if (!isOpen) item.classList.add('open');
+  }
+
+  function handleSubmit(e) {
+    e.preventDefault();
+    const btn = document.getElementById('submit-btn');
+    const txt = document.getElementById('btn-text');
+    btn.classList.add('success');
+    txt.textContent = 'Request Sent ✓';
+    btn.querySelector('span:last-child').style.display = 'none';
+    setTimeout(() => {
+      btn.classList.remove('success');
+      txt.textContent = 'Request Consultation';
+      btn.querySelector('span:last-child').style.display = '';
+    }, 4000);
+  }
+</script>
+</body>
+</html>
