@@ -190,7 +190,7 @@
     .split-section {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      min-height: 680px;
+      min-height: 720px;
     }
     .split-section.reverse { direction: rtl; }
     .split-section.reverse > * { direction: ltr; }
@@ -202,11 +202,13 @@
     .split-img-inner {
       position: absolute;
       inset: 0;
-      background-size: cover;
-      background-position: center;
+      background-size: contain;
+      background-repeat: no-repeat;
+      background-position: center bottom;
+      background-color: #E4E0D9;
       transition: transform 0.8s ease;
     }
-    .split-section:hover .split-img-inner { transform: scale(1.03); }
+    .split-section:hover .split-img-inner { transform: scale(1.02); }
     .split-content {
       background: var(--bg-2);
       padding: 100px 80px;
@@ -735,7 +737,7 @@
     <a href="gallery.html" class="btn-primary">View Full Gallery</a>
   </div>
   <div class="split-img reveal">
-    <div class="split-img-inner" id="split-img-3" style="background-image: url('images/man_burgundy.jpg'); background-size: cover; background-position: top center;"></div>
+    <div class="split-img-inner" id="split-img-3" style="background-image: url('images/man_burgundy.jpg'); background-size: contain; background-repeat: no-repeat; background-position: center bottom; background-color: #E4E0D9;"></div>
   </div>
 </div>
 
