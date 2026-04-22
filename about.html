@@ -410,8 +410,14 @@
 
 <script>
   const nav = document.getElementById('nav');
+  let lastScrollY = 0;
   window.addEventListener('scroll', () => {
-    if (window.scrollY > 60) nav.classList.remove('solid');
+    const y = window.scrollY;
+    if (y > lastScrollY && y > 100) nav.classList.add('nav-hidden');
+    else nav.classList.remove('nav-hidden');
+    if (y > 60) nav.classList.remove('solid');
+    else nav.classList.add('solid');
+    lastScrollY = y;
   });
   const reveals = document.querySelectorAll('.reveal');
   const obs = new IntersectionObserver(entries => {
