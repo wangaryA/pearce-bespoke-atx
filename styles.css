@@ -48,17 +48,14 @@ nav {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 28px 64px;
-  transition: background 0.4s, padding 0.4s, border-color 0.4s, transform 0.35s ease;
-  border-bottom: 1px solid transparent;
+  padding: 22px 64px;
+  background: var(--bg-base);
+  border-bottom: 1px solid var(--gold-dim);
+  transition: transform 0.35s ease;
 }
 nav.nav-hidden { transform: translateY(-100%); }
-nav.scrolled, nav.solid {
-  background: rgba(242,239,233,0.96);
-  backdrop-filter: blur(20px);
-  padding: 18px 64px;
-  border-bottom-color: var(--gold-dim);
-}
+/* Keep .scrolled and .solid for backwards compat — no visual change needed */
+nav.scrolled, nav.solid { background: var(--bg-base); }
 .nav-logo {
   font-family: var(--serif);
   font-weight: 500;
