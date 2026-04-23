@@ -7,151 +7,140 @@
   <link rel="stylesheet" href="styles.css" />
   <style>
 
-    /* ── TOP BAR ── */
-    .top-bar {
-      background: var(--gold);
-      padding: 10px 64px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 12px;
-      position: relative;
-      z-index: 101;
-    }
-    .top-bar-text {
-      font-family: var(--mono);
-      font-size: 0.62rem;
-      letter-spacing: 0.25em;
-      text-transform: uppercase;
-      color: var(--bg-base);
-    }
-    .top-bar a {
-      font-family: var(--mono);
-      font-size: 0.62rem;
-      letter-spacing: 0.25em;
-      text-transform: uppercase;
-      color: var(--bg-base);
-      text-decoration: underline;
-      text-underline-offset: 3px;
-    }
-
     /* ── NAV OVERRIDE — homepage nav scrolls with the page ── */
     nav { position: relative !important; }
 
     /* ── HERO ── */
     .hero {
       position: relative;
-      height: 92vh;
-      min-height: 620px;
+      height: 100vh;
+      min-height: 680px;
       overflow: hidden;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+    }
+    .hero-left {
       display: flex;
-      align-items: center;
+      flex-direction: column;
       justify-content: center;
-    }
-    .hero-bg {
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(135deg, #0d0d12 0%, #12121c 50%, #0a0a0f 100%);
-    }
-    .hero-bg::after {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: repeating-linear-gradient(
-        -45deg, transparent, transparent 36px,
-        rgba(201,168,76,0.025) 36px, rgba(201,168,76,0.025) 37px
-      );
-    }
-    /* If a real image is set, it covers the gradient */
-    .hero-bg.has-image {
-      background-size: cover;
-      background-position: center top;
-      background-repeat: no-repeat;
-    }
-    .hero-bg.has-image::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(to bottom, rgba(0,0,0,0.55) 0%, rgba(0,0,0,0.65) 100%);
-      z-index: 1;
-    }
-    .hero-bg.has-image::after { display: none; }
-
-    .hero-content {
+      padding: 120px 80px 80px;
+      background: #1a1714;
       position: relative;
       z-index: 2;
-      text-align: center;
-      padding: 0 40px;
-      max-width: 860px;
+    }
+    .hero-left::after {
+      content: '';
+      position: absolute;
+      top: 0; right: -1px; bottom: 0;
+      width: 1px;
+      background: linear-gradient(to bottom, transparent, var(--gold), transparent);
     }
     .hero-eyebrow {
       font-family: var(--mono);
-      font-size: 0.65rem;
+      font-size: 0.6rem;
       letter-spacing: 0.35em;
       text-transform: uppercase;
       color: var(--gold);
-      margin-bottom: 28px;
+      margin-bottom: 36px;
       display: flex;
       align-items: center;
-      justify-content: center;
-      gap: 16px;
+      gap: 14px;
     }
-    .hero-eyebrow::before, .hero-eyebrow::after {
+    .hero-eyebrow::before {
       content: '';
-      width: 40px; height: 1px;
+      width: 32px; height: 1px;
       background: var(--gold);
     }
     .hero-h1 {
       font-family: var(--serif);
-      font-size: clamp(3rem, 6vw, 5.8rem);
+      font-size: clamp(3.2rem, 5vw, 5.8rem);
       font-weight: 300;
-      line-height: 1.06;
+      line-height: 1.05;
       color: #ffffff;
-      margin-bottom: 24px;
+      margin-bottom: 32px;
     }
-    .hero-h1 em { font-style: italic; color: var(--gold-light); }
+    .hero-h1 em { font-style: italic; color: var(--gold); }
     .hero-sub {
-      font-size: 1.05rem;
-      line-height: 1.7;
-      color: rgba(255,255,255,0.82);
-      margin-bottom: 48px;
-      max-width: 560px;
-      margin-left: auto;
-      margin-right: auto;
+      font-size: 1rem;
+      line-height: 1.75;
+      color: rgba(255,255,255,0.6);
+      max-width: 420px;
+      margin-bottom: 52px;
     }
     .hero-actions {
       display: flex;
       align-items: center;
-      justify-content: center;
-      gap: 20px;
+      gap: 24px;
       flex-wrap: wrap;
     }
     .hero-scroll {
       position: absolute;
-      bottom: 36px;
-      left: 50%;
-      transform: translateX(-50%);
-      z-index: 3;
+      bottom: 44px; left: 80px;
       display: flex;
-      flex-direction: column;
       align-items: center;
-      gap: 8px;
+      gap: 12px;
     }
     .hero-scroll-line {
-      width: 1px; height: 44px;
-      background: linear-gradient(to bottom, transparent, var(--gold));
-      animation: scrollPulse 2s ease-in-out infinite;
+      width: 44px; height: 1px;
+      background: linear-gradient(to right, transparent, rgba(255,255,255,0.3));
     }
-    @keyframes scrollPulse {
-      0%, 100% { opacity: 0.4; }
-      50% { opacity: 1; }
+    .hero-scroll-label {
+      font-family: var(--mono);
+      font-size: 0.55rem;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.3);
+    }
+    .hero-right {
+      position: relative;
+      overflow: hidden;
+    }
+    .hero-right img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      object-position: center 15%;
+    }
+    .hero-right::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to right, rgba(26,23,20,0.3) 0%, transparent 40%);
+      z-index: 1;
+    }
+
+    /* ── STATEMENT BAND ── */
+    .statement-band {
+      background: var(--gold);
+      padding: 60px 80px;
+      display: grid;
+      grid-template-columns: 1fr auto;
+      align-items: center;
+      gap: 60px;
+    }
+    .statement-text {
+      font-family: var(--serif);
+      font-size: clamp(1.8rem, 3vw, 2.8rem);
+      font-weight: 300;
+      color: var(--on-gold);
+      line-height: 1.2;
+    }
+    .statement-text em { font-style: italic; }
+    .statement-sub {
+      font-family: var(--mono);
+      font-size: 0.62rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: rgba(26,22,19,0.55);
+      max-width: 320px;
+      line-height: 1.9;
+      text-align: right;
     }
 
     /* ── STATS BAR ── */
     .stats-bar {
       background: var(--bg-2);
       border-bottom: 1px solid var(--gold-dim);
-      padding: 44px 64px;
+      padding: 52px 80px;
       display: grid;
       grid-template-columns: repeat(4, 1fr);
     }
@@ -159,40 +148,39 @@
       display: flex;
       flex-direction: column;
       align-items: center;
-      gap: 8px;
+      gap: 10px;
       padding: 0 40px;
       border-right: 1px solid var(--gold-dim);
     }
-    .stat-item:first-child { border-left: none; padding-left: 0; }
+    .stat-item:first-child { padding-left: 0; }
     .stat-item:last-child { border-right: none; }
     .stat-num {
       font-family: var(--serif);
-      font-size: 2.8rem;
+      font-size: 3rem;
       font-weight: 300;
       color: var(--gold);
       line-height: 1;
     }
     .stat-label {
       font-family: var(--mono);
-      font-size: 0.6rem;
+      font-size: 0.58rem;
       letter-spacing: 0.22em;
       text-transform: uppercase;
       color: var(--text-muted);
       text-align: center;
     }
 
-    /* ── SPLIT FEATURE ── */
+    /* ── FEATURE SPLIT ── */
     .split-section {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      min-height: 720px;
+      min-height: 680px;
     }
     .split-section.reverse { direction: rtl; }
     .split-section.reverse > * { direction: ltr; }
     .split-img {
       position: relative;
       overflow: hidden;
-      min-height: 540px;
     }
     .split-img-inner {
       position: absolute;
@@ -211,22 +199,63 @@
       flex-direction: column;
       justify-content: center;
     }
-    .split-content.dark-bg { background: var(--bg-base); }
+    .split-content.dark { background: #1a1714; }
+    .split-content.dark .section-title { color: #fff; }
+    .split-content.dark .section-title em { color: var(--gold); }
+    .split-content.dark .section-eyebrow { color: var(--gold); }
+    .split-content.dark p { color: rgba(255,255,255,0.55); }
     .split-content .section-eyebrow { margin-bottom: 16px; }
-    .split-content .section-title { margin-bottom: 24px; }
-    .split-content p { font-size: 0.92rem; line-height: 1.85; color: var(--cream-dim); margin-bottom: 16px; }
-    .split-content a { margin-top: 12px; }
+    .split-content .section-title { margin-bottom: 28px; }
+    .split-content p { font-size: 0.92rem; line-height: 1.9; color: var(--cream-dim); margin-bottom: 16px; }
+    .split-content a { margin-top: 16px; }
+
+    /* ── WOMEN'S BAND ── */
+    .womens-band {
+      background: var(--bg-3);
+      padding: 100px 80px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: center;
+      min-height: 600px;
+    }
+    .womens-visual {
+      position: relative;
+      height: 540px;
+      overflow: hidden;
+    }
+    .womens-visual img {
+      width: 100%; height: 100%;
+      object-fit: contain;
+      object-position: top center;
+      background: #E4E0D9;
+    }
+    .womens-visual::after {
+      content: '';
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      height: 120px;
+      background: linear-gradient(to top, var(--bg-3), transparent);
+    }
+    .womens-content { display: flex; flex-direction: column; justify-content: center; }
+    .womens-content .section-title { margin-bottom: 28px; }
+    .womens-content p { font-size: 0.92rem; line-height: 1.9; color: var(--cream-dim); margin-bottom: 16px; }
+    .womens-content a { margin-top: 16px; }
 
     /* ── WHY BESPOKE ── */
     #why {
-      background: var(--bg-3);
-      padding: 120px 64px;
+      background: var(--bg-base);
+      padding: 120px 80px;
+      border-top: 1px solid var(--gold-dim);
     }
     .why-header {
-      text-align: center;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: end;
       margin-bottom: 80px;
     }
-    .why-header .section-title { margin-top: 16px; }
+    .why-header p { font-size: 0.9rem; line-height: 1.85; color: var(--cream-dim); }
     .why-grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
@@ -249,28 +278,33 @@
       transform-origin: left;
       transition: transform 0.4s;
     }
-    .why-card:hover { background: #D8D4CD; }
+    .why-card:hover { background: #1a1714; }
     .why-card:hover::before { transform: scaleX(1); }
-    .why-icon { margin-bottom: 28px; opacity: 0.7; }
+    .why-card:hover .why-title { color: #fff; }
+    .why-card:hover .why-body { color: rgba(255,255,255,0.55); }
+    .why-icon { margin-bottom: 32px; opacity: 0.7; }
     .why-title {
       font-family: var(--serif);
       font-size: 1.5rem;
       font-weight: 400;
       color: var(--cream);
-      margin-bottom: 14px;
+      margin-bottom: 16px;
+      transition: color 0.3s;
     }
-    .why-body { font-size: 0.88rem; line-height: 1.8; color: var(--cream-dim); }
+    .why-body { font-size: 0.88rem; line-height: 1.85; color: var(--cream-dim); transition: color 0.3s; }
 
     /* ── PROCESS ── */
     #process {
-      background: var(--bg-2);
-      padding: 120px 64px;
+      background: #1a1714;
+      padding: 120px 80px;
     }
     .process-header {
       text-align: center;
-      margin-bottom: 80px;
+      margin-bottom: 90px;
     }
-    .process-header .section-title { margin-top: 14px; }
+    .process-header .section-eyebrow { color: var(--gold); }
+    .process-header .section-title { color: #fff; margin-top: 14px; }
+    .process-header .section-title em { color: var(--gold); }
     .process-steps {
       display: grid;
       grid-template-columns: repeat(5, 1fr);
@@ -283,93 +317,128 @@
       top: 36px;
       left: 10%; right: 10%;
       height: 1px;
-      background: linear-gradient(to right, transparent, var(--gold), transparent);
-      opacity: 0.3;
+      background: linear-gradient(to right, transparent, rgba(201,168,76,0.4), transparent);
     }
     .process-step {
       display: flex;
       flex-direction: column;
       align-items: center;
       text-align: center;
-      padding: 0 28px;
+      padding: 0 24px;
     }
     .process-dot {
       width: 72px; height: 72px;
-      border: 1px solid var(--gold-dim);
+      border: 1px solid rgba(201,168,76,0.3);
       border-radius: 50%;
       display: flex;
       align-items: center;
       justify-content: center;
-      background: var(--bg-2);
+      background: #1a1714;
       position: relative;
       z-index: 1;
       margin-bottom: 28px;
       transition: background 0.3s, border-color 0.3s;
     }
     .process-step:hover .process-dot { background: var(--gold); border-color: var(--gold); }
-    .process-step:hover .process-dot svg { stroke: var(--bg-base); }
+    .process-step:hover .process-dot svg { stroke: #1a1714; }
     .process-step-num {
       font-family: var(--mono);
-      font-size: 0.58rem;
-      letter-spacing: 0.2em;
+      font-size: 0.55rem;
+      letter-spacing: 0.22em;
       color: var(--gold);
       margin-bottom: 10px;
     }
     .process-step-title {
       font-family: var(--serif);
       font-size: 1.15rem;
-      color: var(--cream);
+      color: #fff;
       margin-bottom: 10px;
     }
     .process-step-body {
-      font-size: 0.82rem;
-      line-height: 1.7;
-      color: var(--cream-dim);
+      font-size: 0.8rem;
+      line-height: 1.75;
+      color: rgba(255,255,255,0.4);
     }
 
-    /* ── FABRIC MILLS ── */
+    /* ── MILLS ── */
     #mills {
       background: var(--bg-base);
-      padding: 72px 64px;
+      padding: 72px 80px;
       border-top: 1px solid var(--gold-dim);
       border-bottom: 1px solid var(--gold-dim);
     }
     .mills-header {
       font-family: var(--mono);
-      font-size: 0.62rem;
+      font-size: 0.6rem;
       letter-spacing: 0.3em;
       text-transform: uppercase;
       color: var(--text-muted);
       text-align: center;
-      margin-bottom: 48px;
+      margin-bottom: 52px;
     }
     .mills-row {
       display: flex;
       align-items: center;
       justify-content: center;
-      gap: 64px;
+      gap: 56px;
       flex-wrap: wrap;
     }
     .mill-name {
       font-family: var(--serif);
-      font-size: 1.35rem;
+      font-size: 1.4rem;
       font-weight: 400;
       color: var(--text-muted);
-      letter-spacing: 0.06em;
+      letter-spacing: 0.04em;
       transition: color 0.2s;
       cursor: default;
     }
-    .mill-name:hover { color: var(--gold-light); }
-    .mill-divider { color: var(--gold-dim); font-size: 0.7rem; }
+    .mill-name:hover { color: var(--gold); }
+    .mill-divider { color: var(--gold-dim); font-size: 0.6rem; }
+
+    /* ── GALLERY TEASE ── */
+    .gallery-tease {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      min-height: 640px;
+    }
+    .gallery-tease-content {
+      background: var(--bg-2);
+      padding: 100px 80px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+    .gallery-tease-content .section-title { margin-bottom: 28px; }
+    .gallery-tease-content p { font-size: 0.92rem; line-height: 1.9; color: var(--cream-dim); margin-bottom: 16px; }
+    .gallery-tease-imgs {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      grid-template-rows: 1fr 1fr;
+      gap: 3px;
+    }
+    .tease-img {
+      position: relative;
+      overflow: hidden;
+      background: #E4E0D9;
+      min-height: 300px;
+    }
+    .tease-img img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      object-position: top center;
+      display: block;
+      transition: transform 0.8s ease;
+    }
+    .tease-img:hover img { transform: scale(1.04); }
 
     /* ── TESTIMONIALS ── */
     #testimonials {
-      background: var(--bg-2);
-      padding: 120px 64px;
+      background: var(--bg-3);
+      padding: 120px 80px;
     }
     .testimonials-header {
       text-align: center;
-      margin-bottom: 72px;
+      margin-bottom: 80px;
     }
     .testimonials-header .section-title { margin-top: 14px; }
     .t-grid {
@@ -380,7 +449,6 @@
     .t-card {
       background: var(--bg-2);
       padding: 52px 44px;
-      position: relative;
     }
     .t-quote-mark {
       font-family: var(--serif);
@@ -402,7 +470,7 @@
       font-weight: 300;
       font-style: italic;
       color: var(--cream);
-      line-height: 1.65;
+      line-height: 1.7;
       margin-bottom: 36px;
     }
     .t-author { display: flex; align-items: center; gap: 16px; }
@@ -421,21 +489,22 @@
     .t-name { font-size: 0.88rem; font-weight: 500; color: var(--cream); }
     .t-role {
       font-family: var(--mono);
-      font-size: 0.58rem;
+      font-size: 0.56rem;
       letter-spacing: 0.15em;
       text-transform: uppercase;
       color: var(--text-muted);
       margin-top: 3px;
     }
 
-    /* ── NEWSLETTER CTA ── */
+    /* ── NEWSLETTER ── */
     #newsletter {
-      background: var(--bg-3);
-      padding: 100px 64px;
+      background: var(--bg-2);
+      padding: 100px 80px;
       display: grid;
       grid-template-columns: 1fr 1fr;
       gap: 80px;
       align-items: center;
+      border-top: 1px solid var(--gold-dim);
     }
     .newsletter-text .section-title { margin-top: 12px; margin-bottom: 16px; }
     .newsletter-text p { font-size: 0.9rem; line-height: 1.8; color: var(--cream-dim); }
@@ -456,7 +525,7 @@
     .newsletter-input:focus { border-color: var(--gold); }
     .newsletter-btn {
       font-family: var(--mono);
-      font-size: 0.65rem;
+      font-size: 0.62rem;
       letter-spacing: 0.18em;
       text-transform: uppercase;
       background: var(--gold);
@@ -467,60 +536,52 @@
       white-space: nowrap;
       transition: background 0.2s;
     }
-    .newsletter-btn:hover { background: var(--gold-light); }
+    .newsletter-btn:hover { background: #b89540; }
     .newsletter-note {
       font-family: var(--mono);
-      font-size: 0.58rem;
+      font-size: 0.56rem;
       letter-spacing: 0.12em;
       color: var(--text-muted);
     }
 
     /* ── CTA BANNER ── */
     #cta-banner {
-      background: var(--gold);
-      padding: 100px 64px;
-      text-align: center;
+      background: #1a1714;
+      padding: 120px 80px;
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 80px;
+      align-items: center;
     }
+    .cta-text .section-eyebrow { color: var(--gold); margin-bottom: 20px; }
     .cta-h {
       font-family: var(--serif);
-      font-size: clamp(2.4rem, 5vw, 4.4rem);
+      font-size: clamp(2.6rem, 4.5vw, 4.8rem);
       font-weight: 300;
-      color: var(--on-gold);
-      line-height: 1.08;
-      margin-bottom: 36px;
+      color: #fff;
+      line-height: 1.06;
+      margin-bottom: 20px;
     }
-    .cta-h em { font-style: italic; }
+    .cta-h em { font-style: italic; color: var(--gold); }
     .cta-sub {
-      font-size: 1rem;
-      color: rgba(26,22,19,0.65);
-      margin-bottom: 44px;
-      max-width: 480px;
-      margin-left: auto;
-      margin-right: auto;
+      font-size: 0.92rem;
+      color: rgba(255,255,255,0.45);
+      line-height: 1.8;
+      max-width: 440px;
     }
-    .btn-dark {
+    .cta-action { display: flex; flex-direction: column; align-items: flex-end; gap: 20px; flex-shrink: 0; }
+    .cta-action .btn-primary { white-space: nowrap; padding: 20px 48px; font-size: 0.68rem; }
+    .cta-note {
       font-family: var(--mono);
-      font-size: 0.7rem;
-      letter-spacing: 0.2em;
+      font-size: 0.56rem;
+      letter-spacing: 0.18em;
       text-transform: uppercase;
-      color: var(--gold);
-      background: var(--on-gold);
-      padding: 18px 44px;
-      text-decoration: none;
-      display: inline-block;
-      transition: background 0.2s;
+      color: rgba(255,255,255,0.25);
+      text-align: right;
     }
-    .btn-dark:hover { background: #2a2520; }
   </style>
 </head>
 <body>
-
-<!-- TOP BAR -->
-<div class="top-bar">
-  <span class="top-bar-text">Cedar Park, Texas · Mobile Custom Clothier</span>
-  <span class="top-bar-text">·</span>
-  <a href="contact.html">Book Your Free Fitting →</a>
-</div>
 
 <!-- NAV -->
 <nav id="nav">
@@ -536,20 +597,29 @@
 
 <!-- HERO -->
 <section class="hero">
-  <div class="hero-bg has-image" id="hero-bg" style="background-image: url('images/woman_teal_suit.jpg'); background-position: center 20%;"></div>
-  <div class="hero-content">
+  <div class="hero-left">
     <div class="hero-eyebrow fade-up d1">Cedar Park, Texas · By Appointment</div>
-    <h1 class="hero-h1 fade-up d2">Austin's Best<br><em>Custom Suits</em></h1>
-    <p class="hero-sub fade-up d3">Custom suits, sport coats and tuxedos — tailored in Austin and delivered with unmatched personal service.</p>
+    <h1 class="hero-h1 fade-up d2">Custom Clothing.<br><em>Designed Around You.</em></h1>
+    <p class="hero-sub fade-up d3">A mobile, appointment-only experience for professionals and clients who value quality, trust, and time. We come to you.</p>
     <div class="hero-actions fade-up d4">
       <a href="contact.html" class="btn-primary">Book Your Fitting</a>
-      <a href="services.html" class="btn-ghost">Explore Services</a>
+      <a href="services.html" class="btn-ghost" style="color:rgba(255,255,255,0.5);">Explore Services</a>
+    </div>
+    <div class="hero-scroll fade-up d5">
+      <div class="hero-scroll-line"></div>
+      <span class="hero-scroll-label">Scroll</span>
     </div>
   </div>
-  <div class="hero-scroll fade-up d5">
-    <div class="hero-scroll-line"></div>
+  <div class="hero-right">
+    <img src="images/mens-custom-suits-16.webp" alt="Pearce Bespoke ATX — Custom Suiting" />
   </div>
 </section>
+
+<!-- STATEMENT BAND -->
+<div class="statement-band reveal">
+  <div class="statement-text">The perfect fit<br><em>is confidence.</em></div>
+  <div class="statement-sub">Austin's premier mobile custom clothier — suits, sport coats, and tuxedos crafted for those who lead.</div>
+</div>
 
 <!-- STATS BAR -->
 <div class="stats-bar reveal">
@@ -571,39 +641,56 @@
   </div>
 </div>
 
-<!-- SPLIT: WHO WE ARE -->
+<!-- SPLIT: WHY PEARCE BESPOKE ATX -->
 <div class="split-section">
   <div class="split-img reveal">
-    <div class="split-img-inner" id="split-img-1" style="background-image: url('images/man_navy_3piece.jpg'); background-size: cover; background-position: top center;"></div>
+    <div class="split-img-inner" style="background-image: url('images/bespoke_suit_2.webp'); background-size: cover; background-position: top center;"></div>
   </div>
   <div class="split-content reveal">
     <div class="section-eyebrow">Austin's Premier Custom Clothier</div>
-    <h2 class="section-title">Why Pearce<br><em>Bespoke ATX?</em></h2>
+    <h2 class="section-title">Exceptional Guidance.<br><em>Exact Results.</em></h2>
     <p>Pearce Bespoke ATX offers a private, tailored experience for clients who expect more. Rashaka comes to you — at your home, office, or club — making it easy to look exceptional without stepping into a store.</p>
     <p>We create custom suits, sport coats, tuxedos, shirts, and outerwear with precision and efficiency. Each piece is made to measure, delivered in 3–4 weeks, and backed by our Perfect Fit Guarantee.</p>
     <a href="about.html" class="btn-outline">Meet the Clothier</a>
   </div>
 </div>
 
-<!-- SPLIT: MEN'S BESPOKE (reversed) -->
+<!-- SPLIT: MEN'S BESPOKE (dark) -->
 <div class="split-section reverse">
   <div class="split-img reveal">
-    <div class="split-img-inner" id="split-img-2" style="background-image: url('images/man_blue_3piece.jpg'); background-size: cover; background-position: top center;"></div>
+    <div class="split-img-inner" style="background-image: url('images/man_blue_3piece.jpg'); background-size: cover; background-position: top center;"></div>
   </div>
-  <div class="split-content dark-bg reveal">
+  <div class="split-content dark reveal">
     <div class="section-eyebrow">Men's Bespoke Suiting</div>
     <h2 class="section-title">Dressed to Lead.<br><em>Built for You.</em></h2>
     <p>From boardroom power suits to wedding-day three-pieces, every garment is engineered around your exact measurements, your fabric choice, and your personal style.</p>
-    <p>No off-the-rack compromises. No generic fit. Just a suit that moves the way you move and commands the room you walk into.</p>
+    <p>No off-the-rack compromises. No generic fit. Just a suit that moves the way you move and commands every room you walk into.</p>
     <a href="contact.html" class="btn-primary">Book a Men's Fitting</a>
+  </div>
+</div>
+
+<!-- WOMEN'S SECTION -->
+<div class="womens-band reveal">
+  <div class="womens-visual reveal">
+    <img src="images/woman_yellow_blazer.jpg" alt="Women's Custom Suiting — Pearce Bespoke ATX" />
+  </div>
+  <div class="womens-content reveal">
+    <div class="section-eyebrow">Women's Custom Suiting</div>
+    <h2 class="section-title">Power. Precision.<br><em>Custom for Women.</em></h2>
+    <p>Custom suiting for women who command the room — made to move, lead, and win. From tailored blazers and two-piece suits to skirt sets and business attire, every piece is designed around you.</p>
+    <p>We work with the same world-class fabrics and the same uncompromising standards. Because exceptional fit isn't just for men.</p>
+    <a href="contact.html" class="btn-primary">Book a Women's Fitting</a>
   </div>
 </div>
 
 <!-- WHY BESPOKE -->
 <section id="why">
   <div class="why-header reveal">
-    <div class="section-eyebrow">Why Custom Is Worth It</div>
-    <h2 class="section-title">The Best Custom Suits<br><em>Aren't Off the Rack</em></h2>
+    <div>
+      <div class="section-eyebrow">Why Custom Is Worth It</div>
+      <h2 class="section-title">The Best Custom Suits<br><em>Aren't Off the Rack</em></h2>
+    </div>
+    <p>This isn't off-the-rack service. It's custom, delivered with purpose. A commitment to quality, precision, and personal expression — because the best investment you can make is in how you present yourself.</p>
   </div>
   <div class="why-grid reveal">
     <div class="why-card">
@@ -651,19 +738,18 @@
   <div class="process-steps reveal">
     <div class="process-step">
       <div class="process-dot">
-        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#c9a84c" stroke-width="1.5">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#c9a84c" stroke-width="1.5">
           <rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/>
         </svg>
       </div>
       <div class="process-step-num">01</div>
       <div class="process-step-title">Schedule</div>
-      <div class="process-step-body">We come to you — home, office, or club. Wherever is most convenient.</div>
+      <div class="process-step-body">Whether it's your home, office, or club — we go where it's most convenient for you.</div>
     </div>
     <div class="process-step">
       <div class="process-dot">
-        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#c9a84c" stroke-width="1.5">
-          <path d="M2 12h20M12 2v20"/>
-          <circle cx="12" cy="12" r="3"/>
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#c9a84c" stroke-width="1.5">
+          <path d="M2 12h20M12 2v20"/><circle cx="12" cy="12" r="3"/>
         </svg>
       </div>
       <div class="process-step-num">02</div>
@@ -672,35 +758,34 @@
     </div>
     <div class="process-step">
       <div class="process-dot">
-        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#c9a84c" stroke-width="1.5">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#c9a84c" stroke-width="1.5">
           <circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="3"/>
           <path d="M12 3v2M12 19v2M3 12h2M19 12h2"/>
         </svg>
       </div>
       <div class="process-step-num">03</div>
       <div class="process-step-title">Select</div>
-      <div class="process-step-body">Choose from the world's finest fabrics, trims, and custom linings.</div>
+      <div class="process-step-body">Choose from the world's finest, small-batch fabrics, trims, and custom liners.</div>
     </div>
     <div class="process-step">
       <div class="process-dot">
-        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#c9a84c" stroke-width="1.5">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#c9a84c" stroke-width="1.5">
           <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
         </svg>
       </div>
       <div class="process-step-num">04</div>
       <div class="process-step-title">Tailor</div>
-      <div class="process-step-body">Your bespoke garment is crafted to perfection. Ready in 3–4 weeks.</div>
+      <div class="process-step-body">Crafted from premium mills with disciplined precision. Your garment is ready in 3–4 weeks.</div>
     </div>
     <div class="process-step">
       <div class="process-dot">
-        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#c9a84c" stroke-width="1.5">
-          <path d="M5 12l5 5L20 7"/>
-          <circle cx="12" cy="12" r="10"/>
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#c9a84c" stroke-width="1.5">
+          <path d="M5 12l5 5L20 7"/><circle cx="12" cy="12" r="10"/>
         </svg>
       </div>
       <div class="process-step-num">05</div>
       <div class="process-step-title">Deliver</div>
-      <div class="process-step-body">Final alterations and our Perfect Fit Guarantee. Delivered to your door.</div>
+      <div class="process-step-body">Fitted and refined until it feels entirely your own. Backed by our Perfect Fit Guarantee.</div>
     </div>
   </div>
 </section>
@@ -724,15 +809,27 @@
 </section>
 
 <!-- GALLERY TEASE -->
-<div class="split-section">
-  <div class="split-content reveal">
+<div class="gallery-tease">
+  <div class="gallery-tease-content reveal">
     <div class="section-eyebrow">The Work</div>
     <h2 class="section-title">Every Stitch,<br><em>Intentional</em></h2>
     <p>From the boardroom to the golf course, our clients redefine luxury with bespoke craftsmanship. Every stitch, every fit, every detail — designed for those who make an impact.</p>
+    <p>Discover Austin's best custom suits, sport coats, and tuxedos — all tailored to order.</p>
     <a href="gallery.html" class="btn-primary">View Full Gallery</a>
   </div>
-  <div class="split-img reveal">
-    <div class="split-img-inner" id="split-img-3" style="background-image: url('images/man_burgundy.jpg'); background-size: contain; background-repeat: no-repeat; background-position: center bottom; background-color: #E4E0D9;"></div>
+  <div class="gallery-tease-imgs">
+    <div class="tease-img reveal">
+      <img src="images/man_burgundy.jpg" alt="The Burgundy Bold" />
+    </div>
+    <div class="tease-img reveal">
+      <img src="images/man_black_suit.jpg" alt="The Midnight Navy" />
+    </div>
+    <div class="tease-img reveal">
+      <img src="images/man_navy_windowpane.jpg" alt="The Windowpane" />
+    </div>
+    <div class="tease-img reveal">
+      <img src="images/man_charcoal_blazer.jpg" alt="The Charcoal Check" />
+    </div>
   </div>
 </div>
 
@@ -782,9 +879,15 @@
 
 <!-- CTA BANNER -->
 <section id="cta-banner" class="reveal">
-  <h2 class="cta-h">The perfect fit<br><em>is confidence.</em></h2>
-  <p class="cta-sub">Begin your custom suit journey in Austin — crafted for confidence, tailored exclusively for you. Your first consultation is always complimentary.</p>
-  <a href="contact.html" class="btn-dark">Book Your Free Fitting</a>
+  <div class="cta-text">
+    <div class="section-eyebrow">Begin Your Journey</div>
+    <h2 class="cta-h">Your first consultation<br><em>is always complimentary.</em></h2>
+    <p class="cta-sub">No commitment. No pressure. Just a conversation about who you are and what you need to look your best.</p>
+  </div>
+  <div class="cta-action">
+    <a href="contact.html" class="btn-primary">Book Your Free Fitting</a>
+    <div class="cta-note">Cedar Park, Texas · Mobile Service</div>
+  </div>
 </section>
 
 <footer>
@@ -829,36 +932,17 @@
 </footer>
 
 <script>
-  // Scroll reveals
   const reveals = document.querySelectorAll('.reveal');
   const obs = new IntersectionObserver(entries => {
     entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); } });
   }, { threshold: 0.07, rootMargin: '0px 0px -30px 0px' });
   reveals.forEach(el => obs.observe(el));
 
-  // Newsletter
   function handleNewsletter(btn) {
     btn.textContent = 'Subscribed ✓';
     btn.style.background = '#3d7a52';
     btn.style.color = '#fff';
     btn.previousElementSibling.disabled = true;
-  }
-
-  // Image swap helper — call swapHeroImage(url) or swapSplitImage(n, url) from console once you have photo URLs
-  function swapHeroImage(url) {
-    const bg = document.getElementById('hero-bg');
-    bg.style.backgroundImage = `url('${url}')`;
-    bg.classList.add('has-image');
-  }
-  function swapSplitImage(n, url) {
-    const el = document.getElementById('split-img-' + n);
-    if (el) {
-      el.style.backgroundImage = `url('${url}')`;
-      el.style.backgroundSize = 'cover';
-      el.style.backgroundPosition = 'center';
-      el.classList.remove('img-placeholder');
-      el.innerHTML = '';
-    }
   }
 </script>
 </body>
