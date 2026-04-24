@@ -1,5 +1,5 @@
 /* ── PEARCE BESPOKE — Shared Stylesheet ── */
-@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=DM+Sans:wght@300;400;500&family=DM+Mono:wght@300;400&display=swap');
+/* Fonts loaded per-page via async <link> tags for non-render-blocking */
 
 :root {
   --gold: #c9a84c;
@@ -10,7 +10,7 @@
   --bg-3: #E4E0D9;
   --cream: #1C1814;
   --cream-dim: #4A4640;
-  --text-muted: #8A8580;
+  --text-muted: #575350;
   --on-gold: #1a1613;
   --serif: 'Cormorant Garamond', Georgia, serif;
   --sans: 'DM Sans', system-ui, sans-serif;
@@ -65,7 +65,7 @@ nav.scrolled, nav.solid { background: var(--bg-base); }
   color: var(--cream);
   text-decoration: none;
 }
-.nav-logo span { color: var(--gold); }
+.nav-logo span { color: #7A5C0E; }
 .nav-links { display: flex; gap: 40px; list-style: none; }
 .nav-links a {
   font-family: var(--mono);
@@ -298,7 +298,7 @@ footer {
   color: var(--cream);
   margin-bottom: 6px;
 }
-.footer-brand span { color: var(--gold); }
+.footer-brand span { color: var(--cream-dim); }
 .footer-tagline {
   font-family: var(--mono);
   font-size: 0.6rem;
@@ -313,7 +313,7 @@ footer {
   font-size: 0.62rem;
   letter-spacing: 0.22em;
   text-transform: uppercase;
-  color: var(--gold);
+  color: var(--cream-dim);
   margin-bottom: 22px;
 }
 .footer-links { list-style: none; display: flex; flex-direction: column; gap: 12px; }

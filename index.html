@@ -93,6 +93,12 @@
   }
   </script>
 
+  <!-- Preconnect for Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <!-- Load fonts async — non-render-blocking -->
+  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=DM+Sans:wght@300;400;500&family=DM+Mono:wght@300;400&display=swap" onload="this.rel='stylesheet'">
+  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=DM+Sans:wght@300;400;500&family=DM+Mono:wght@300;400&display=swap"></noscript>
   <link rel="stylesheet" href="styles.css" />
   <style>
 
@@ -895,6 +901,7 @@
   <div class="mobile-menu-footer">Cedar Park, Texas · By Appointment</div>
 </div>
 
+<main>
 <!-- HERO -->
 <section class="hero">
   <div class="hero-left">
@@ -911,7 +918,7 @@
     </div>
   </div>
   <div class="hero-right">
-    <img src="images/mens-custom-suits-16.webp" alt="Pearce Bespoke ATX — Custom Suiting" />
+    <img src="images/mens-custom-suits-16.webp" alt="Pearce Bespoke ATX — Custom Suiting" fetchpriority="high" />
   </div>
 </section>
 
@@ -972,7 +979,7 @@
 <!-- WOMEN'S SECTION -->
 <div class="womens-band reveal">
   <div class="womens-visual reveal">
-    <img src="images/woman_yellow_blazer.jpg" alt="Women's Custom Suiting — Pearce Bespoke ATX" />
+    <img src="images/woman_yellow_blazer.jpg" alt="Women's Custom Suiting — Pearce Bespoke ATX" loading="lazy" />
   </div>
   <div class="womens-content reveal">
     <div class="section-eyebrow">Women's Custom Suiting</div>
@@ -1119,16 +1126,16 @@
   </div>
   <div class="gallery-tease-imgs">
     <div class="tease-img reveal">
-      <img src="images/man_burgundy.jpg" alt="The Burgundy Bold" />
+      <img src="images/man_burgundy.jpg" alt="The Burgundy Bold" loading="lazy" />
     </div>
     <div class="tease-img reveal">
-      <img src="images/man_black_suit.jpg" alt="The Midnight Navy" />
+      <img src="images/man_black_suit.jpg" alt="The Midnight Navy" loading="lazy" />
     </div>
     <div class="tease-img reveal">
-      <img src="images/man_navy_windowpane.jpg" alt="The Windowpane" />
+      <img src="images/man_navy_windowpane.jpg" alt="The Windowpane" loading="lazy" />
     </div>
     <div class="tease-img reveal">
-      <img src="images/man_charcoal_blazer.jpg" alt="The Charcoal Check" />
+      <img src="images/man_charcoal_blazer.jpg" alt="The Charcoal Check" loading="lazy" />
     </div>
   </div>
 </div>
@@ -1189,6 +1196,8 @@
     <div class="cta-note">Cedar Park, Texas · Mobile Service</div>
   </div>
 </section>
+
+</main>
 
 <footer>
   <div class="footer-top">
