@@ -370,7 +370,7 @@
 
       <form class="form-grid" id="booking-form" novalidate>
         <input type="hidden" name="access_key" value="91594ece-a1af-4535-bcfb-2631527d20a6" />
-        <input type="hidden" name="subject" value="New Consultation Request — Pearce Bespoke ATX" />
+        <input type="hidden" name="subject" value="New Consultation Request - Pearce Bespoke ATX" />
         <input type="hidden" name="preferred_time" id="f-time-value" value="" />
         <div class="form-group">
           <label class="form-label">First Name</label>
@@ -572,6 +572,7 @@
         body: JSON.stringify(data)
       });
       const json = await res.json();
+      console.log('Web3Forms response:', json);
 
       if (json.success) {
         btn.classList.add('success');
@@ -593,12 +594,13 @@
         throw new Error(json.message || 'Submission failed');
       }
     } catch (err) {
+      console.error('Web3Forms error:', err);
       txt.textContent = 'Request Consultation';
       arrow.style.display = '';
       btn.style.pointerEvents = '';
       btn.style.opacity = '';
       status.style.color = '#d9796a';
-      status.textContent = 'Something went wrong. Please try again or email us directly.';
+      status.textContent = 'Error: ' + (err.message || 'Something went wrong. Please try again.');
     }
   });
 </script>
