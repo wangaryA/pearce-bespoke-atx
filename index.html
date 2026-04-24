@@ -10,70 +10,6 @@
     /* ── NAV OVERRIDE — homepage nav scrolls with the page ── */
     nav { position: relative !important; }
 
-    /* ── MOBILE — 430px ── */
-    @media (max-width: 768px) {
-      .hero { grid-template-columns: 1fr; height: auto; min-height: 100svh; }
-      .hero-right { height: 46vh; order: -1; }
-      .hero-right img { object-position: center 20%; }
-      .hero-left { padding: 44px 28px 56px; }
-      .hero-h1 { font-size: clamp(2.6rem, 10vw, 3.6rem); }
-      .hero-sub { font-size: 0.88rem; margin-bottom: 32px; }
-      .hero-left::after { display: none; }
-      .hero-scroll { display: none; }
-
-      .statement-band { grid-template-columns: 1fr; gap: 16px; padding: 44px 28px; }
-      .statement-sub { text-align: left; max-width: 100%; }
-      .statement-text { font-size: clamp(1.6rem, 6vw, 2.2rem); }
-
-      .stats-bar { grid-template-columns: 1fr 1fr; padding: 0; gap: 0; }
-      .stat-item { padding: 28px 16px; border-right: none; border-bottom: 1px solid var(--gold-dim); }
-      .stat-item:nth-child(odd) { border-right: 1px solid var(--gold-dim); }
-      .stat-item:nth-child(3), .stat-item:nth-child(4) { border-bottom: none; }
-
-      .split-section { grid-template-columns: 1fr; direction: ltr !important; min-height: auto; }
-      .split-section.reverse > * { direction: ltr; }
-      .split-img { min-height: 300px; order: -1; }
-      .split-content { padding: 52px 28px; }
-      .split-content.dark { order: 1; }
-
-      .womens-band { grid-template-columns: 1fr; padding: 60px 28px; gap: 0; min-height: auto; }
-      .womens-visual { height: 360px; order: -1; margin: 0 -28px 40px; width: calc(100% + 56px); }
-      .womens-content { padding: 0; }
-
-      #why { padding: 72px 28px; }
-      .why-header { grid-template-columns: 1fr; gap: 16px; margin-bottom: 48px; }
-      .why-grid { grid-template-columns: 1fr; }
-      .why-card { padding: 44px 32px; }
-
-      #process { padding: 72px 28px; }
-      .process-header { margin-bottom: 60px; }
-      .process-steps { grid-template-columns: 1fr 1fr; gap: 44px 20px; }
-      .process-steps::before { display: none; }
-      .process-steps .process-step:last-child { grid-column: span 2; }
-
-      #mills { padding: 48px 28px; }
-      .mills-row { gap: 24px; }
-      .mill-name { font-size: 1.05rem; }
-      .mill-divider { display: none; }
-
-      .gallery-tease { grid-template-columns: 1fr; }
-      .gallery-tease-content { padding: 60px 28px 44px; }
-      .gallery-tease-imgs { grid-template-rows: 220px 220px; }
-
-      #testimonials { padding: 72px 28px; }
-      .t-grid { grid-template-columns: 1fr; }
-
-      #newsletter { grid-template-columns: 1fr; padding: 72px 28px; gap: 36px; border-top: 1px solid var(--gold-dim); }
-      .newsletter-input-row { flex-direction: column; gap: 0; }
-      .newsletter-input { border-right: 1px solid var(--gold-dim); border-bottom: none; }
-      .newsletter-btn { padding: 16px; }
-
-      #cta-banner { grid-template-columns: 1fr; padding: 72px 28px; gap: 36px; }
-      .cta-action { align-items: flex-start; }
-      .cta-note { text-align: left; }
-      .cta-h { font-size: clamp(2.2rem, 8vw, 3.2rem); }
-    }
-
     /* ── HERO ── */
     .hero {
       position: relative;
@@ -642,6 +578,162 @@
       text-transform: uppercase;
       color: rgba(255,255,255,0.25);
       text-align: right;
+    }
+
+    /* ── MOBILE 430px — must come AFTER all component styles ── */
+    @media (max-width: 768px) {
+      /* Hero: stack image on top, text below */
+      .hero {
+        grid-template-columns: 1fr;
+        height: auto;
+        min-height: 100svh;
+      }
+      .hero-right {
+        height: 52vw;
+        min-height: 260px;
+        max-height: 340px;
+        order: -1;
+        width: 100%;
+      }
+      .hero-right img { object-position: center 15%; }
+      .hero-right::before { display: none; }
+      .hero-left {
+        padding: 40px 24px 52px;
+        order: 1;
+      }
+      .hero-left::after { display: none; }
+      .hero-h1 { font-size: clamp(2.4rem, 9vw, 3.4rem); margin-bottom: 20px; }
+      .hero-sub { font-size: 0.88rem; margin-bottom: 32px; max-width: 100%; }
+      .hero-actions { flex-direction: column; align-items: stretch; gap: 12px; }
+      .hero-actions .btn-primary { text-align: center; padding: 16px 24px; }
+      .hero-actions .btn-ghost { justify-content: center; }
+      .hero-scroll { display: none; }
+
+      /* Statement band: single column */
+      .statement-band {
+        grid-template-columns: 1fr;
+        gap: 20px;
+        padding: 44px 24px;
+      }
+      .statement-text { font-size: clamp(1.7rem, 6vw, 2.2rem); }
+      .statement-sub { text-align: left; max-width: 100%; }
+
+      /* Stats: 2×2 grid */
+      .stats-bar {
+        grid-template-columns: 1fr 1fr;
+        padding: 0;
+        gap: 0;
+      }
+      .stat-item {
+        padding: 28px 12px;
+        border-right: none !important;
+        border-bottom: 1px solid var(--gold-dim);
+        align-items: center;
+      }
+      .stat-item:nth-child(1),
+      .stat-item:nth-child(3) { border-right: 1px solid var(--gold-dim) !important; }
+      .stat-item:nth-child(3),
+      .stat-item:nth-child(4) { border-bottom: none; }
+
+      /* Split sections: single column */
+      .split-section {
+        grid-template-columns: 1fr !important;
+        direction: ltr !important;
+        min-height: auto;
+      }
+      .split-section > * { direction: ltr !important; }
+      .split-img {
+        height: 280px;
+        min-height: unset;
+        order: 0 !important;
+        width: 100%;
+      }
+      .split-img-inner {
+        background-size: cover !important;
+        background-position: center top !important;
+      }
+      .split-content {
+        padding: 48px 24px;
+        order: 1 !important;
+      }
+
+      /* Women's section */
+      .womens-band {
+        grid-template-columns: 1fr;
+        padding: 0 0 56px;
+        gap: 0;
+        min-height: auto;
+      }
+      .womens-visual {
+        height: 320px;
+        order: 0;
+        width: 100%;
+        margin: 0;
+      }
+      .womens-visual img { object-fit: cover; object-position: center top; }
+      .womens-content {
+        padding: 44px 24px 0;
+        order: 1;
+      }
+
+      /* Why section */
+      #why { padding: 72px 24px; }
+      .why-header { grid-template-columns: 1fr; gap: 16px; margin-bottom: 48px; }
+      .why-grid { grid-template-columns: 1fr; }
+      .why-card { padding: 40px 28px; }
+
+      /* Process */
+      #process { padding: 72px 24px; }
+      .process-header { margin-bottom: 52px; }
+      .process-steps {
+        grid-template-columns: 1fr 1fr;
+        gap: 40px 16px;
+      }
+      .process-steps::before { display: none; }
+      .process-step:last-child { grid-column: span 2; }
+      .process-step-body { font-size: 0.78rem; }
+
+      /* Mills */
+      #mills { padding: 48px 24px; }
+      .mills-header { font-size: 0.55rem; margin-bottom: 36px; }
+      .mills-row { gap: 20px; justify-content: flex-start; }
+      .mill-name { font-size: 1rem; }
+      .mill-divider { display: none; }
+
+      /* Gallery tease */
+      .gallery-tease { grid-template-columns: 1fr; }
+      .gallery-tease-content { padding: 56px 24px 40px; }
+      .gallery-tease-imgs {
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: 200px 200px;
+      }
+      .tease-img { min-height: unset; }
+
+      /* Testimonials */
+      #testimonials { padding: 72px 24px; }
+      .t-grid { grid-template-columns: 1fr; }
+      .t-card { padding: 40px 28px; }
+
+      /* Newsletter */
+      #newsletter {
+        grid-template-columns: 1fr;
+        padding: 72px 24px;
+        gap: 36px;
+      }
+      .newsletter-input-row { flex-direction: column; }
+      .newsletter-input { border-right: 1px solid var(--gold-dim); border-bottom: none; }
+      .newsletter-btn { padding: 16px; width: 100%; }
+
+      /* CTA banner */
+      #cta-banner {
+        grid-template-columns: 1fr;
+        padding: 72px 24px;
+        gap: 36px;
+      }
+      .cta-action { align-items: stretch; }
+      .cta-action .btn-primary { text-align: center; }
+      .cta-note { text-align: left; }
+      .cta-h { font-size: clamp(2rem, 8vw, 3rem); }
     }
   </style>
 </head>
