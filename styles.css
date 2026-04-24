@@ -442,27 +442,55 @@ footer {
   color: var(--text-muted);
 }
 
-/* ── GLOBAL MOBILE RESPONSIVE ── */
+/* ── TABLET (769px – 1024px) ── */
+@media (min-width: 769px) and (max-width: 1024px) {
+  nav { padding: 20px 40px; }
+  .page-hero { padding: 120px 40px 64px; }
+  .page-title { font-size: clamp(2.6rem, 6vw, 4rem); }
+  footer { padding: 64px 40px 36px; }
+  .footer-top { grid-template-columns: 1fr 1fr; gap: 40px; }
+  .footer-top > div:first-child { grid-column: span 2; }
+  .footer-bottom { flex-wrap: wrap; gap: 12px; }
+}
+
+/* ── GLOBAL MOBILE RESPONSIVE (≤768px) ── */
 @media (max-width: 768px) {
   /* Nav */
-  nav { padding: 18px 24px; }
+  nav { padding: 18px 20px; }
   .nav-links, .nav-cta { display: none !important; }
   .nav-hamburger { display: flex; }
+  .nav-logo { font-size: 1.05rem; }
 
   /* Page hero */
-  .page-hero { padding: 100px 24px 56px; min-height: 36vh; }
-  .page-title { font-size: clamp(2.4rem, 10vw, 3.2rem); }
-  .page-subtitle { font-size: 0.85rem; margin-top: 16px; }
+  .page-hero { padding: 96px 20px 52px; min-height: 34vh; }
+  .page-title { font-size: clamp(2.2rem, 9vw, 3rem); }
+  .page-subtitle { font-size: 0.84rem; margin-top: 14px; }
 
   /* Marquee */
   .marquee-strip { padding: 10px 0; }
+  .marquee-item { font-size: 0.75rem; padding: 0 22px; }
 
   /* Footer */
-  footer { padding: 52px 24px 32px; }
-  .footer-top {
-    grid-template-columns: 1fr 1fr;
-    gap: 32px;
-  }
+  footer { padding: 48px 20px 28px; }
+  .footer-top { grid-template-columns: 1fr 1fr; gap: 28px; }
   .footer-top > div:first-child { grid-column: span 2; }
-  .footer-bottom { flex-direction: column; gap: 12px; text-align: center; }
+  .footer-bottom { flex-direction: column; gap: 10px; text-align: center; }
+  .footer-legal { justify-content: center; }
+}
+
+/* ── SMALL PHONES (≤375px) ── */
+@media (max-width: 375px) {
+  nav { padding: 16px 16px; }
+  .nav-logo { font-size: 0.95rem; letter-spacing: 0.15em; }
+  .page-hero { padding: 88px 16px 44px; }
+  .page-title { font-size: clamp(2rem, 9vw, 2.6rem); }
+  footer { padding: 44px 16px 24px; }
+  .footer-top { grid-template-columns: 1fr; }
+  .footer-top > div:first-child { grid-column: span 1; }
+}
+
+/* ── LARGE DESKTOP (≥1440px) ── */
+@media (min-width: 1440px) {
+  nav { padding: 24px 80px; }
+  footer { padding: 100px 80px 48px; }
 }

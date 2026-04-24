@@ -233,6 +233,20 @@
     }
     .award-org { font-size: 0.82rem; color: var(--text-muted); }
 
+    @media (min-width: 769px) and (max-width: 1024px) {
+      #owner-intro { padding: 80px 48px; }
+      .owner-layout { grid-template-columns: 1fr 1fr; gap: 48px; }
+      .owner-portrait { height: 520px; }
+      #philosophy { padding: 80px 48px; }
+      .philosophy-layout { grid-template-columns: 1fr 1fr; gap: 48px; }
+      #franchise { padding: 80px 48px; }
+      .franchise-layout { grid-template-columns: 1fr 1fr; gap: 48px; }
+      .brand-values { grid-template-columns: 1fr 1fr; }
+      #recognition { padding: 80px 48px; }
+      .recognition-grid { grid-template-columns: 1fr 1fr; }
+      div[style*="padding: 90px 64px"] { padding: 72px 48px !important; }
+    }
+
     @media (max-width: 768px) {
       #owner-intro { padding: 64px 24px; }
       .owner-layout { grid-template-columns: 1fr; gap: 48px; }

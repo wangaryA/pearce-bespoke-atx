@@ -580,6 +580,30 @@
       text-align: right;
     }
 
+    /* ── TABLET (769px – 1024px) ── */
+    @media (min-width: 769px) and (max-width: 1024px) {
+      .hero { min-height: 600px; }
+      .hero-left { padding: 100px 48px 64px; }
+      .hero-h1 { font-size: clamp(2.6rem, 5vw, 3.6rem); }
+      .statement-band { padding: 60px 48px; gap: 48px; }
+      .stats-bar { padding: 0 40px; }
+      .split-section { min-height: 500px; }
+      .split-content { padding: 56px 48px; }
+      .split-img { min-height: 380px; }
+      .womens-band { padding: 0 0 72px; }
+      .womens-content { padding: 72px 48px; }
+      #why { padding: 80px 48px; }
+      .why-grid { grid-template-columns: 1fr 1fr; }
+      #process { padding: 80px 48px; }
+      .process-steps { grid-template-columns: repeat(2, 1fr); }
+      .process-step:last-child { grid-column: unset; }
+      #mills { padding: 48px 48px; }
+      .gallery-tease { grid-template-columns: 1fr 1fr; }
+      .gallery-tease-content { padding: 80px 48px; }
+      .gallery-tease-imgs { grid-template-columns: 1fr 1fr; }
+      #testimonials { padding: 80px 48px; }
+    }
+
     /* ── MOBILE 430px — must come AFTER all component styles ── */
     @media (max-width: 768px) {
       /* Hero: stack image on top, text below */
@@ -735,6 +759,22 @@
       .cta-action .btn-primary { text-align: center; }
       .cta-note { text-align: left; }
       .cta-h { font-size: clamp(2rem, 8vw, 3rem); }
+    }
+
+    /* ── SMALL PHONES (≤375px) ── */
+    @media (max-width: 375px) {
+      .hero-left { padding: 32px 16px 44px; }
+      .hero-h1 { font-size: clamp(2rem, 10vw, 2.6rem); }
+      .statement-band { padding: 36px 16px; }
+      .split-content { padding: 40px 16px; }
+      .womens-content { padding: 36px 16px 0; }
+      #why { padding: 56px 16px; }
+      #process { padding: 56px 16px; }
+      #mills { padding: 40px 16px; }
+      .gallery-tease-content { padding: 44px 16px 32px; }
+      #testimonials { padding: 56px 16px; }
+      #newsletter { padding: 56px 16px; }
+      #cta-banner { padding: 56px 16px; }
     }
   </style>
 </head>

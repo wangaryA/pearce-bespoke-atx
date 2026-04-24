@@ -205,6 +205,18 @@
     }
     .btn-dark:hover { background: #2a2520; }
 
+    @media (min-width: 769px) and (max-width: 1024px) {
+      section[style*="padding: 100px 64px"] { padding: 80px 48px !important; }
+      .services-grid { grid-template-columns: 1fr 1fr; }
+      .service-card { padding: 48px 36px; }
+      #process { padding: 80px 48px; }
+      .steps-layout { grid-template-columns: repeat(2, 1fr); }
+      .step-card::after { display: none; }
+      #fabrics { padding: 80px 48px; }
+      .fabrics-layout { grid-template-columns: 1fr 1fr; gap: 48px; }
+      .services-cta { padding: 80px 48px; }
+    }
+
     @media (max-width: 768px) {
       section[style*="padding: 100px 64px"] { padding: 64px 24px !important; }
       .services-grid { grid-template-columns: 1fr; }
