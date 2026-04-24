@@ -368,26 +368,29 @@
       <div class="form-heading">Request a Consultation</div>
       <div class="form-subheading">We'll confirm within 24 hours</div>
 
-      <div class="form-grid" id="booking-form">
+      <form class="form-grid" id="booking-form" novalidate>
+        <input type="hidden" name="access_key" value="91594ece-a1af-4535-bcfb-2631527d20a6" />
+        <input type="hidden" name="subject" value="New Consultation Request — Pearce Bespoke ATX" />
+        <input type="hidden" name="preferred_time" id="f-time-value" value="" />
         <div class="form-group">
           <label class="form-label">First Name</label>
-          <input class="form-input" type="text" placeholder="James" id="f-first" />
+          <input class="form-input" type="text" name="first_name" placeholder="James" required />
         </div>
         <div class="form-group">
           <label class="form-label">Last Name</label>
-          <input class="form-input" type="text" placeholder="Thornton" id="f-last" />
+          <input class="form-input" type="text" name="last_name" placeholder="Thornton" required />
         </div>
         <div class="form-group">
           <label class="form-label">Email</label>
-          <input class="form-input" type="email" placeholder="james@example.com" id="f-email" />
+          <input class="form-input" type="email" name="email" placeholder="james@example.com" required />
         </div>
         <div class="form-group">
           <label class="form-label">Phone</label>
-          <input class="form-input" type="tel" placeholder="(512) 000-0000" id="f-phone" />
+          <input class="form-input" type="tel" name="phone" placeholder="(512) 000-0000" />
         </div>
         <div class="form-group form-full">
           <label class="form-label">Service Interest</label>
-          <select class="form-select" id="f-service">
+          <select class="form-select" name="service">
             <option value="">Select a service...</option>
             <option>Full Bespoke Suit</option>
             <option>Custom Dress Shirts</option>
@@ -408,16 +411,17 @@
         </div>
         <div class="form-group form-full">
           <label class="form-label">Tell us about your vision</label>
-          <textarea class="form-textarea" id="f-message" placeholder="Occasion, timeline, any details about your style goals..."></textarea>
+          <textarea class="form-textarea" name="message" placeholder="Occasion, timeline, any details about your style goals..."></textarea>
         </div>
         <div class="form-full">
-          <button class="form-submit" id="submit-btn" onclick="handleSubmit(event)">
+          <button class="form-submit" id="submit-btn" type="submit">
             <span id="btn-text">Request Consultation</span>
-            <span>→</span>
+            <span id="btn-arrow">→</span>
           </button>
-          <div class="form-note">By submitting this form you agree to be contacted by Pearce Bespoke ATX. We never share your information. Your first consultation is always complimentary.</div>
+          <div class="form-note" id="form-status"></div>
+          <div class="form-note" style="margin-top:8px;">By submitting this form you agree to be contacted by Pearce Bespoke ATX. We never share your information. Your first consultation is always complimentary.</div>
         </div>
-      </div>
+      </form>
     </div>
   </div>
 </section>
@@ -540,19 +544,63 @@
     if (!isOpen) item.classList.add('open');
   }
 
-  function handleSubmit(e) {
+  document.getElementById('booking-form').addEventListener('submit', async function(e) {
     e.preventDefault();
     const btn = document.getElementById('submit-btn');
     const txt = document.getElementById('btn-text');
-    btn.classList.add('success');
-    txt.textContent = 'Request Sent ✓';
-    btn.querySelector('span:last-child').style.display = 'none';
-    setTimeout(() => {
-      btn.classList.remove('success');
+    const arrow = document.getElementById('btn-arrow');
+    const status = document.getElementById('form-status');
+
+    // Collect selected time chips into hidden field
+    const chips = [...document.querySelectorAll('.time-chip.selected')]
+      .map(c => c.innerText.replace('\n', ' ')).join(', ');
+    document.getElementById('f-time-value').value = chips || 'No preference';
+
+    // Loading state
+    txt.textContent = 'Sending…';
+    arrow.style.display = 'none';
+    btn.style.pointerEvents = 'none';
+    btn.style.opacity = '0.8';
+    status.textContent = '';
+
+    const data = Object.fromEntries(new FormData(this));
+
+    try {
+      const res = await fetch('https://api.web3forms.com/submit', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+        body: JSON.stringify(data)
+      });
+      const json = await res.json();
+
+      if (json.success) {
+        btn.classList.add('success');
+        txt.textContent = 'Request Sent ✓';
+        arrow.style.display = 'none';
+        status.style.color = '#7bbf95';
+        status.textContent = 'Thank you — we\'ll be in touch within 24 hours.';
+        this.reset();
+        document.querySelectorAll('.time-chip').forEach(c => c.classList.remove('selected'));
+        setTimeout(() => {
+          btn.classList.remove('success');
+          txt.textContent = 'Request Consultation';
+          arrow.style.display = '';
+          btn.style.pointerEvents = '';
+          btn.style.opacity = '';
+          status.textContent = '';
+        }, 6000);
+      } else {
+        throw new Error(json.message || 'Submission failed');
+      }
+    } catch (err) {
       txt.textContent = 'Request Consultation';
-      btn.querySelector('span:last-child').style.display = '';
-    }, 4000);
-  }
+      arrow.style.display = '';
+      btn.style.pointerEvents = '';
+      btn.style.opacity = '';
+      status.style.color = '#d9796a';
+      status.textContent = 'Something went wrong. Please try again or email us directly.';
+    }
+  });
 </script>
 </body>
 </html>
