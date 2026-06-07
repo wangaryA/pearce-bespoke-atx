@@ -7,7 +7,7 @@
   <link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
   <link rel="icon" type="image/png" sizes="16x16" href="favicon-16.png">
   <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
-  <title>Custom Suits Austin TX | Pearce Bespoke ATX</title>
+  <title>Custom Suits Austin | Pearce Bespoke ATX</title>
   <meta name="description" content="Pearce Bespoke ATX is Cedar Park and Austin's premier mobile bespoke clothier. Rashaka Boykins brings world-class custom suits, dress shirts, and tailoring directly to you — home, office, or event. Book your complimentary consultation today." />
   <meta name="keywords" content="Rashaka Boykins, Pearce Bespoke ATX, Pearce Bespoke Austin, custom suits Austin TX, bespoke tailor Cedar Park, mobile tailor Austin Texas, custom clothing Austin, bespoke suits Austin, made to measure suits Austin, custom dress shirts Austin, wedding suits Austin TX" />
   <meta name="author" content="Rashaka Boykins" />
@@ -891,6 +891,14 @@
       .newsletter-input { border-right: 1px solid var(--gold-dim); border-bottom: none; }
       .newsletter-btn { padding: 16px; width: 100%; }
 
+      /* Service area */
+      #service-area {
+        grid-template-columns: 1fr;
+        padding: 72px 24px;
+        gap: 36px;
+      }
+      .city-list { padding-top: 0; }
+
       /* CTA banner */
       #cta-banner {
         grid-template-columns: 1fr;
@@ -901,6 +909,43 @@
       .cta-action .btn-primary { text-align: center; }
       .cta-note { text-align: left; }
       .cta-h { font-size: clamp(2rem, 8vw, 3rem); }
+    }
+
+    /* ── SERVICE AREA ── */
+    #service-area {
+      background: var(--bg-2);
+      padding: 100px 80px;
+      border-top: 1px solid var(--gold-dim);
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: start;
+    }
+    #service-area .section-title { margin-bottom: 24px; margin-top: 14px; }
+    .service-area-content p { font-size: 0.92rem; line-height: 1.9; color: var(--cream-dim); margin-bottom: 14px; }
+    .city-list {
+      list-style: none;
+      padding-top: 72px;
+    }
+    .city-list li {
+      font-family: var(--mono);
+      font-size: 0.68rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--cream-dim);
+      padding: 18px 0;
+      border-bottom: 1px solid var(--gold-dim);
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+    .city-list li:first-child { border-top: 1px solid var(--gold-dim); }
+    .city-list li::before {
+      content: '';
+      width: 22px;
+      height: 1px;
+      background: var(--gold);
+      flex-shrink: 0;
     }
 
     /* ── SMALL PHONES (≤375px) ── */
@@ -917,6 +962,7 @@
       #testimonials { padding: 56px 16px; }
       #newsletter { padding: 56px 16px; }
       #cta-banner { padding: 56px 16px; }
+      #service-area { padding: 56px 16px; }
     }
   </style>
 </head>
@@ -953,8 +999,8 @@
 <section class="hero">
   <div class="hero-left">
     <div class="hero-eyebrow fade-up d1">Cedar Park, Texas · By Appointment</div>
-    <h1 class="hero-h1 fade-up d2">Custom Suits.<br><em>Designed Around You.</em></h1>
-    <p class="hero-sub fade-up d3">A mobile, appointment-only experience for professionals and clients who value quality, trust, and time. We come to you.</p>
+    <h1 class="hero-h1 fade-up d2">Custom Suits in Austin —<br><em>We Come to You.</em></h1>
+    <p class="hero-sub fade-up d3">Bespoke. Mobile. Built around your schedule.</p>
     <div class="hero-actions fade-up d4">
       <a href="contact.html" class="btn-primary">Book Your Fitting</a>
       <a href="services.html" class="btn-ghost" style="color:rgba(255,255,255,0.5);">Explore Services</a>
@@ -1020,6 +1066,20 @@
     <p>From boardroom power suits to wedding-day three-pieces, every garment is engineered around your exact measurements, your fabric choice, and your personal style.</p>
     <p>No off-the-rack compromises. No generic fit. Just a suit that moves the way you move and commands every room you walk into.</p>
     <a href="contact.html" class="btn-primary">Book a Men's Fitting</a>
+  </div>
+</div>
+
+<!-- SPLIT: WEDDING SUITS & TUXEDOS -->
+<div class="split-section">
+  <div class="split-img reveal">
+    <div class="split-img-inner" style="background-image: url('images/hero_couple.jpg'); background-size: cover; background-position: top center;"></div>
+  </div>
+  <div class="split-content reveal">
+    <div class="section-eyebrow">Weddings & Formalwear</div>
+    <h2 class="section-title">Wedding Suits & Tuxedos<br><em>in Austin</em></h2>
+    <p>Your wedding day deserves a suit as unique as the moment. Pearce Bespoke ATX creates fully custom wedding suits and tuxedos — crafted to your exact measurements, in the fabric and style you choose.</p>
+    <p>From classic black tie to a bold three-piece, we guide you through every detail. We come to you for every fitting, so your entire wedding party can be fitted in one convenient location.</p>
+    <a href="contact.html" class="btn-primary">Book a Wedding Consultation</a>
   </div>
 </div>
 
@@ -1231,6 +1291,25 @@
       <div class="t-author"><div class="t-avatar">J</div><div><div class="t-name">John Rowell</div><div class="t-role">Pearce Bespoke Client</div></div></div>
     </div>
   </div>
+</section>
+
+<!-- SERVICE AREA -->
+<section id="service-area" class="reveal">
+  <div class="service-area-content">
+    <div class="section-eyebrow">Where We Serve</div>
+    <h2 class="section-title">Serving Austin &<br><em>Cedar Park</em></h2>
+    <p>Pearce Bespoke ATX provides premium custom suits in Austin, Texas, delivering a personalized bespoke tailoring experience directly to your home or office. Our mobile clothier service eliminates the need to visit a traditional showroom by offering convenient at-home fitting appointments, expert measurements, and one-on-one style consultations.</p>
+    <p>Whether you're looking for a custom wedding suit, business attire, sport coat, tuxedo, or a complete wardrobe upgrade, each garment is crafted from high-quality fabrics and tailored to your exact specifications. We specialize in helping professionals, executives, grooms, and style-conscious individuals achieve a superior fit, exceptional comfort, and timeless confidence through truly bespoke clothing.</p>
+    <p>Serving Austin and the surrounding areas, Pearce Bespoke ATX combines luxury craftsmanship, personalized service, and unmatched convenience to create a new suiting experience.</p>
+  </div>
+  <ul class="city-list">
+    <li>Austin, TX</li>
+    <li>Cedar Park, TX</li>
+    <li>Round Rock, TX</li>
+    <li>Georgetown, TX</li>
+    <li>Pflugerville, TX</li>
+    <li>Leander, TX</li>
+  </ul>
 </section>
 
 <!-- CTA BANNER -->
